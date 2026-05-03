@@ -779,43 +779,37 @@
             document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
             
             // Lưu style gốc
-            var origStyle = element.style.cssText;
+            var origContentStyle = element.style.cssText;
             var printPages = element.querySelectorAll('.print-page');
             var origPageStyles = [];
             printPages.forEach(function(pp) {
                 origPageStyles.push(pp.style.cssText);
             });
             
-            // === CÁCH MỚI: bỏ margin trái/phải của html2pdf ===
-            // Thay bằng padding trực tiếp trên #content
-            // A4 = 210mm = 794px (96dpi). Padding 20mm = 76px mỗi bên.
-            // Nội dung nằm trong 794 - 76*2 = 642px (≈170mm vùng in)
-            element.style.width = '794px';
-            element.style.padding = '0 76px';
-            element.style.boxSizing = 'border-box';
-            element.style.overflow = 'hidden';
-            element.style.background = 'white';
+            // Đặt #content width = 645px (khớp với .print-page CSS)
+            // để html2canvas capture đúng kích thước nội dung
+            element.style.width = '645px';
             
+            // Bỏ margin:0 auto → nội dung bắt đầu từ x=0
             printPages.forEach(function(pp) {
-                pp.style.width = '100%';
                 pp.style.margin = '0';
             });
             
             var opt = {
-              margin:       [15, 0, 15, 0],
+              margin:       [15, 20, 15, 20],
               filename:     filename,
               image:        { type: 'jpeg', quality: 0.98 },
               html2canvas:  { 
                   useCORS: true,
                   scale: 2,
-                  windowWidth: 794
+                  windowWidth: 645
               },
               jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
               pagebreak:    { mode: 'css', avoid: ['p', 'tr', 'li', '.bold', '.center', '.signature-box', 'table'] }
             };
             
             function restoreStyles() {
-                element.style.cssText = origStyle;
+                element.style.cssText = origContentStyle;
                 printPages.forEach(function(pp, i) {
                     pp.style.cssText = origPageStyles[i] || '';
                 });
@@ -837,3 +831,4 @@
 </script>
 </body>
 </html>
+
