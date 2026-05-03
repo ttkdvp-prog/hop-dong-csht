@@ -797,12 +797,44 @@
                 var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
                 var marginTop = 15, marginLeft = 20;
                 var innerWidth = 170; // 210 - 20 - 20
+                var innerHeight = 267; // 297 - 15 - 15
+                var isFirstPage = true;
                 
-                canvases.forEach(function(canvas, i) {
-                    if (i > 0) pdf.addPage();
-                    var imgData = canvas.toDataURL('image/jpeg', 0.98);
-                    var imgHeight = canvas.height * innerWidth / canvas.width;
-                    pdf.addImage(imgData, 'JPEG', marginLeft, marginTop, innerWidth, imgHeight);
+                canvases.forEach(function(canvas) {
+                    var imgWidthMm = innerWidth;
+                    var imgHeightMm = canvas.height * innerWidth / canvas.width;
+                    
+                    if (imgHeightMm <= innerHeight) {
+                        // Nội dung vừa 1 trang → thêm trực tiếp
+                        if (!isFirstPage) pdf.addPage();
+                        isFirstPage = false;
+                        var imgData = canvas.toDataURL('image/jpeg', 0.98);
+                        pdf.addImage(imgData, 'JPEG', marginLeft, marginTop, imgWidthMm, imgHeightMm);
+                    } else {
+                        // Nội dung dài hơn 1 trang → cắt canvas thành nhiều phần
+                        var pxPerMm = canvas.width / innerWidth;
+                        var pageHeightPx = Math.floor(innerHeight * pxPerMm);
+                        var totalPages = Math.ceil(canvas.height / pageHeightPx);
+                        
+                        for (var p = 0; p < totalPages; p++) {
+                            if (!isFirstPage) pdf.addPage();
+                            isFirstPage = false;
+                            
+                            var srcY = p * pageHeightPx;
+                            var srcH = Math.min(pageHeightPx, canvas.height - srcY);
+                            
+                            // Tạo canvas tạm chứa phần nội dung của trang này
+                            var pageCanvas = document.createElement('canvas');
+                            pageCanvas.width = canvas.width;
+                            pageCanvas.height = srcH;
+                            var ctx = pageCanvas.getContext('2d');
+                            ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+                            
+                            var pageImgData = pageCanvas.toDataURL('image/jpeg', 0.98);
+                            var pageImgHeightMm = srcH * innerWidth / canvas.width;
+                            pdf.addImage(pageImgData, 'JPEG', marginLeft, marginTop, imgWidthMm, pageImgHeightMm);
+                        }
+                    }
                 });
                 
                 pdf.save(filename);
