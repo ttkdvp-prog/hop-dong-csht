@@ -775,15 +775,26 @@
             soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
             var filename = soHD + '.pdf';
             
-            // A4 = 210mm, margin trái 20mm + phải 20mm = vùng in 170mm
-            // 170mm ở 96dpi ≈ 643px. Đặt windowWidth = 643 để nội dung vừa khít vùng in.
-            // Tạm thời mở rộng .print-page width = 100% để nội dung tràn đầy viewport ảo.
+            // === Tạm thời điều chỉnh layout để html2canvas capture chính xác ===
+            // Nguyên nhân lỗi: .print-page có margin:0 auto (centering) khiến
+            // html2canvas capture từ vị trí offset trong DOM → bị cắt chữ.
+            // Fix: bỏ centering, đặt width cố định, position absolute left:0
+            
             var printPages = document.querySelectorAll('.print-page');
-            var originalWidths = [];
+            var origPageStyles = [];
             printPages.forEach(function(pp) {
-                originalWidths.push(pp.style.width);
+                origPageStyles.push(pp.style.cssText);
                 pp.style.width = '100%';
+                pp.style.margin = '0';
+                pp.style.padding = '0';
             });
+            
+            // Đặt #content width cố định và vị trí bắt đầu từ left=0
+            var origContentStyle = element.style.cssText;
+            element.style.width = '645px';
+            element.style.position = 'absolute';
+            element.style.left = '0';
+            element.style.top = document.getElementById('action-buttons').offsetHeight + 'px';
             
             var opt = {
               margin:       [15, 20, 15, 20],
@@ -792,9 +803,11 @@
               html2canvas:  { 
                   useCORS: true,
                   scale: 2,
-                  windowWidth: 643,
+                  windowWidth: 645,
                   scrollX: 0,
-                  scrollY: 0
+                  scrollY: 0,
+                  x: 0,
+                  y: 0
               },
               jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
               pagebreak:    { mode: 'css', avoid: ['p', 'tr', 'li', '.bold', '.center', '.signature-box', 'table'] }
@@ -804,22 +817,27 @@
             document.getElementById('loading').style.display = 'block';
             document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
             
-            html2pdf().set(opt).from(element).save().then(function() {
-                // Khôi phục width gốc
-                printPages.forEach(function(pp, i) {
-                    pp.style.width = originalWidths[i] || '';
+            // Chờ DOM reflow trước khi capture
+            setTimeout(function() {
+                html2pdf().set(opt).from(element).save().then(function() {
+                    // Khôi phục style gốc
+                    element.style.cssText = origContentStyle;
+                    printPages.forEach(function(pp, i) {
+                        pp.style.cssText = origPageStyles[i] || '';
+                    });
+                    document.getElementById('action-buttons').style.display = 'block';
+                    document.getElementById('loading').style.display = 'none';
+                }).catch(function(err) {
+                    // Khôi phục style gốc khi lỗi
+                    element.style.cssText = origContentStyle;
+                    printPages.forEach(function(pp, i) {
+                        pp.style.cssText = origPageStyles[i] || '';
+                    });
+                    console.error(err);
+                    document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
+                    document.getElementById('action-buttons').style.display = 'block';
                 });
-                document.getElementById('action-buttons').style.display = 'block';
-                document.getElementById('loading').style.display = 'none';
-            }).catch(function(err) {
-                // Khôi phục width gốc khi lỗi
-                printPages.forEach(function(pp, i) {
-                    pp.style.width = originalWidths[i] || '';
-                });
-                console.error(err);
-                document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
-                document.getElementById('action-buttons').style.display = 'block';
-            });
+            }, 100);
         }
 </script>
 </body>
