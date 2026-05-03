@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Hợp Đồng Thuê CSHT</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @page {
+            size: A4;
+            margin-top: 15mm;
+            margin-bottom: 15mm;
+            margin-left: 20mm;
+            margin-right: 20mm;
+        }
+        body { 
+            font-family: 'Times New Roman', serif; 
+            line-height: 1.3; 
+            font-size: 13pt; 
+            margin: 0; 
+            padding: 0; 
+            color: #000;
+        }
+        
+        .center { text-align: center; }
+        .bold { font-weight: bold !important; }
+        .italic { font-style: italic; }
+        .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+        .signature-box { display: flex; justify-content: space-between; margin-top: 20px; page-break-inside: avoid; }
+        .signature-col { width: 45%; text-align: center; }
+        .signature-space { height: 100px; }
+        p { margin: 5px 0; text-align: justify; }
+        ul, ol { margin-top: 5px; margin-bottom: 5px; }
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .table-custom th, .table-custom td { border: 1px solid black; padding: 8px; text-align: left; }
+        @media print {
+            #loading { display: none !important; }
+            #action-buttons { display: none !important; }
+        }
+        #loading { text-align: center; font-size: 20px; color: #666; margin-top: 50px; }
+        #content { display: none; }
+        .data-field { font-weight: normal; }
+    
+        .print-page {
+            width: 645px;
+            margin: 0 auto;
+            background: white;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .print-page + .print-page {
+            page-break-before: always;
+        }
+        p, tr, td, li, .bold, .center, .signature-box, table {
+            page-break-inside: avoid;
+        }
+        @media print {
+            .print-page {
+                width: 100%;
+                page-break-after: always;
+            }
+            .print-page:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Đang tải dữ liệu hợp đồng...</div>
+    <div id="action-buttons" style="text-align: center; margin-bottom: 20px; display: none; padding-top: 20px;">
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-weight: bold;">🖨️ In Hợp Đồng</button>
+        <button onclick="exportHTMLToPDF()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; font-weight: bold;">📄 Tải file PDF</button>
+        <button onclick="exportHTMLToDoc()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #2196F3; color: white; border: none; border-radius: 4px; font-weight: bold;">💾 Tải file Word (.doc)</button>
+    </div>
+    <div id="content">
+    <div class="print-page">
+
+
+        <!-- ================= TRANG 1: HỢP ĐỒNG ================= -->
+        <div class="center bold">
+            CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+            Độc lập - Tự do - Hạnh phúc<br>
+            --------------------
+        </div>
+        
+        <div class="center title" style="margin-bottom: 5px;">HỢP ĐỒNG</div>
+        <div class="center title" style="margin-top: 0; margin-bottom: 5px;">THUÊ ĐẤT XÂY DỰNG TRẠM THÔNG TIN DI ĐỘNG</div>
+        <div class="center bold" style="margin-bottom: 5px;">Số: <span class="data-field So_Hop_Dong" style="color: blue;">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ</div>
+        <div class="center" style="font-size: 13pt;">Trạm <span class="data-field Vi_Tri_Thue" style="color: blue;">...</span> (<span class="data-field Ma_Tram" style="color: blue;">...</span>)</div>
+        <br>
+        <p class="italic">Căn cứ Bộ luật dân sự số 91/2015/QH13 được Quốc hội nước Cộng hòa xã hội chủ nghĩa Việt Nam thông qua ngày 24 tháng 11 năm 2015 tại kỳ họp thứ 10 Quốc khóa XIII;</p>
+        <p class="italic">Căn cứ luật thương mại số 36/2005/QH11 đã được Quốc hội nước Cộng hoà xã hội chủ nghĩa Việt Nam thông qua ngày 14/6/2005;</p>
+        <p class="italic">Căn cứ nhu cầu và khả năng đáp ứng của các bên.</p>
+        
+        <p>Hôm nay, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>, tại <span class="data-field Ben_A_Dia_Chi">...</span>, chúng tôi gồm:</p>
+        
+        <p class="bold">BÊN CHO THUÊ ĐẤT (dưới đây gọi tắt là bên A)</p>
+        <p>- Ông/bà: <span class="data-field bold Ben_A_Ho_Ten">...</span> – Đại diện gia đình</p>
+        <p>- Số điện thoại: <span class="data-field Ben_A_SDT">...</span></p>
+        <p>- CCCD số: <span class="data-field Ben_A_CCCD">...</span> - cấp ngày: <span class="data-field Ben_A_Ngay_Cap">...</span></p>
+        <p>- Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
+        <p>- Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
+        <p>- Tài khoản: <span class="data-field Ben_A_STK">...</span> Ngân hàng: <span class="data-field Ben_A_Ngan_Hang">...</span></p>
+        
+        <p class="bold">BÊN THUÊ ĐẤT (dưới đây gọi tắt là bên B)</p>
+        <p>- Tên doanh nghiệp: <span class="bold">VIỄN THÔNG PHÚ THỌ</span></p>
+        <p>- Địa chỉ: Số 1468, đường Hùng Vương, phường Thanh Miếu, tỉnh Phú Thọ</p>
+        <p>- Điện thoại: 0210.3860.123 - Fax: 0210.3860.123</p>
+        <p>- Số tài khoản: 110000031172 tại Ngân hàng Thương mại cổ phần Công thương Việt Nam – Chi nhánh Phú Thọ</p>
+        <p>- Mã số thuế: 2600102568</p>
+        <p>- Đại diện là: Ông Lê Văn Đức</p>
+        <p>- Chức vụ: Phó Giám đốc</p>
+        <p class="italic">(Theo Giấy ủy quyền số 1653/GUQ-PTO-NSTH ngày 01/10/2025 của Giám đốc Viễn thông Phú Thọ)</p>
+        <br>
+        <p>Hai bên thống nhất thỏa thuận ký hợp đồng với những điều khoản như sau:</p>
+        
+        <p class="bold">Điều 1. Đối tượng của hợp đồng.</p>
+        <p>- Gia đình ông/bà <span class="data-field Ben_A_Ho_Ten">...</span> đồng ý cho Viễn Thông Phú Thọ thuê mặt bằng nhà, đất và một số vị trí để trồng cột dẫn điện AC và cáp quang lên vị trí đất làm trạm phát sóng tại địa chỉ <span class="data-field Ben_A_Dia_Chi">...</span> để sử dụng vào mục đích: Xây dựng trạm phát sóng thông tin di động.</p>
+        <p>- Diện tích mặt bằng bên A cho bên B thuê là: <span class="data-field Dien_Tich_Thue">...</span> m2.</p>
+        <p>- Diện tích đất, nhà và tài sản trên là thuộc quyền sở hữu hợp pháp và duy nhất của bên A.</p>
+        <p>- Tài sản khác bên A cho bên B thuê: không có.</p>
+        <p>- Thời hạn cho thuê đất là <span class="data-field Thoi_Han_Thue">...</span> năm. Kể từ ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>.</p>
+
+        <p class="bold">Điều 2. Trách nhiệm và Quyền lợi của bên A</p>
+        <p>- Bàn giao vị trí, mặt bằng cho bên B (như đã ghi tại Điều 1) của hợp đồng.</p>
+        <p>- Đảm bảo, tạo điều kiện cho bên B lắp đặt đường điện AC và cáp truyền dẫn kéo phục vụ hoạt động của trạm.</p>
+        <p>- Chịu trách nhiệm và đảm bảo tính pháp lý các thủ tục cần thiết về quyền sở hữu mặt bằng cho thuê. Đảm bảo mặt bằng cho thuê không có sự tranh chấp phản đối của các hộ xung quanh, doanh nghiệp khác ...</p>
+        <p>- Tạo điều kiện thuận lợi cho bên B trong quá trình thi công xây dựng, lắp đặt, vận hành thiết bị, nâng cấp, sửa chữa, bảo dưỡng, xử lý ứng cứu, khắc phục sự cố 24h/24h kể cả ngày lễ và các ngày nghỉ để đảm bảo chất lượng thông tin theo quy định của ngành Bưu chính Viễn thông.</p>
+        <p>- Đảm bảo an toàn cho toàn bộ vật tư, thiết bị của bên B được lắp đặt tại nơi thuê (bên A).</p>
+        <p>- Đảm bảo quyền sử dụng vị trí, mặt bằng của bên B thuê, không chuyển giao quyền sử dụng cho tổ chức và cá nhân khác trong thời gian thực hiện hợp đồng giữa hai bên. Trong trường hợp nếu phải chuyển giao thì hợp đồng này vẫn được thực thi tiếp đối với bên được chuyển giao đến khi hết hạn hợp đồng.</p>
+        <p>- Trong thời gian thực hiện hợp đồng bên A có trách nhiệm phối hợp với bên B trông coi, bảo vệ tài sản của bên B, khi có sự cố bất thường xảy ra, bên A liên hệ ngay cho bên B. Trong trường hợp xảy ra mất mát tài sản của bên B, bên A có trách nhiệm cùng phối hợp bên B và các cơ quan chức năng trong quá trình điều tra tài sản bị mất đó cho bên B.</p>
+
+        <p class="bold">Điều 3. Trách nhiệm và Quyền lợi của bên B</p>
+        <p>- Được toàn quyền sử dụng vị trí, mặt bằng đã thuê phục vụ đầy đủ cho việc phát sóng trạm thông tin di động.</p>
+        <p>- Việc xây dựng các công trình phải phù hợp với mục đích đã ghi trong điều 1 của hợp đồng này.</p>
+        <p>- Trong quá trình thi công lắp đặt và quản lý sử dụng phải đảm bảo phải tuyệt đối an toàn cho người và các công trình khác liền kề. Bảo đảm mỹ quan, vệ sinh môi trường và có đầy đủ dụng cụ phòng chống cháy nổ. Trong trường hợp để xảy ra mất an toàn (do lỗi của bên B) thì bên B phải có trách nhiệm bồi thường thiệt hại và chịu hoàn toàn trước pháp luật.</p>
+        <p>- Trong thời gian thực hiện hợp đồng, bên B không được quyền chuyển giao mặt bằng thuê cho tổ chức, cá nhân khác dưới bất kỳ hình thức nào nếu chưa được cơ quan có thẩm quyền của nhà nước Việt Nam cho phép.</p>
+        <p>- Thanh toán tiền đầy đủ cho bên A theo Điều 4 của hợp đồng.</p>
+
+        <p class="bold">Điều 4. Đơn giá, thời hạn và phương thức thanh toán</p>
+        <p>- Thời hạn thuê <span class="data-field Thoi_Han_Thue">...</span> năm kể từ ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>.</p>
+        <p>- Giá thuê hàng tháng: <span class="data-field Gia_Thue_Thang">...</span> VNĐ/tháng. (Bằng chữ: <span class="data-field Gia_Thue_Chu">...</span>). Giá trên bao gồm tiền thuê đất + trông coi bảo vệ trạm.</p>
+        <p>- Hai bên thống nhất giá thuê trên không thay đổi trong suốt thời gian thực hiện hợp đồng.</p>
+        <p>- Phương thức thanh toán: Bên B sẽ thanh toán cho bên A định kỳ thanh toán 12 tháng/lần và thanh toán vào tháng đầu của kỳ thanh toán.</p>
+
+        <p class="bold">Điều 5. Hiệu lực hợp đồng</p>
+        <p>- Hợp đồng có hiệu lực <span class="data-field Thoi_Han_Thue">...</span> năm kể từ ngày ký.</p>
+        <p>- Trước khi hết hạn hợp đồng 03 tháng mà bên A hoặc bên B không có văn bản hoặc thông báo cho nhau về việc kết thúc hợp đồng, thì hợp đồng này sẽ có hiệu lực thêm 05 năm tiếp theo. Quy định này được áp dụng tương tự cho các năm hiệu lực tiếp theo của hợp đồng và cho đến khi một trong hai bên có đề nghị chấm dứt hợp đồng.</p>
+        <p>- Trường hợp thuê không tròn tháng thì giá thuê sẽ được tính: giá thuê tròn tháng/30 ngày X (nhân) với số ngày sử dụng thực tế trong tháng.</p>
+        <p>- Nếu bên A không còn nhu cầu cho bên B thuê tiếp thì phải thông báo cho bên B bằng văn bản trước tối thiểu 03 tháng kể từ ngày dự định chấm dứt và phải đền bù cho bên B toàn bộ giá trị thiệt hại do phải dịch chuyển trạm trước thời hạn của hợp đồng.</p>
+        <p>- Hợp đồng thuê đất đương nhiên hết hiệu lực trong các trường hợp sau đây:</p>
+        <p>  + Mặt bằng bị tiêu hủy do nguyên nhân bất khả kháng (thiên tai, chiến tranh.... )</p>
+        <p>  + Theo sự thỏa thuận của các bên.</p>
+        <p>  + Bên B bị phát mại tài sản hoặc bị phá sản.</p>
+        <p>  + Bên B bị thu hồi quyết định thuê đất hoặc giấy phép hoạt động trước thời hạn.</p>
+        <p>- Hợp đồng này tự động được thanh lý trong các trường hợp sau:</p>
+        <p>  + Hết thời hạn thuê mà hai bên không ký tiếp hoặc không thỏa thuận gia hạn;</p>
+        <p>  + Bên A không còn quyền sở hữu hoặc quyền sử dụng hợp pháp đối với mặt bằng;</p>
+        <p>  + Bên B có quyết định di dời hoặc ngừng khai thác trạm theo kế hoạch mạng lưới của Tập đoàn VNPT;</p>
+        <p>- Trong thời gian thực hiện hợp đồng bên A đảm bảo quyền sử dụng đất của bên B, nếu vi phạm bên A phải chịu trách nhiệm về những thiệt hại của bên B do bên A gây ra.</p>
+
+        <p class="bold">Điều 6. Phạt vi phạm hợp đồng và giải quyết tranh chấp.</p>
+        <p>- Nếu một trong hai bên không thực hiện đầy đủ các trách nhiệm ghi trong hợp đồng này dẫn đến thiệt hại về kinh tế cho bên kia thì phải chịu bồi thường toàn bộ các giá trị thiệt hại đó.</p>
+        <p>- Trong trường hợp xảy ra tranh chấp thì hai bên tích cực tìm biện pháp để thương lượng giải quyết. Nếu các bên vẫn không giải quyết được thì đưa ra Tòa án nơi bên A đặt trụ sở để giải quyết. Quyết định của Tòa án buộc các bên phải thi hành. Mọi chi phí liên quan đến giải quyết tranh chấp do bên thua kiện chịu.</p>
+
+        <p class="bold">Điều 7. Điều khoản chung</p>
+        <p>- Hai bên cam kết thực hiện đúng theo các điều khoản của hợp đồng.</p>
+        <p>- Mọi thay đổi trong hợp đồng phải được sự thỏa thuận của hai bên bằng văn bản. Nếu bên nào không thực hiện hợp đồng hoặc thực hiện trái với điều đã cam kết thì bên đó phải bồi thường theo pháp luật hiện hành.</p>
+        <p>- Các yêu cầu, bổ sung sau này (nếu có) đã được thỏa thuận bằng văn bản của cả hai bên được coi là bộ phận không thể tách rời của hợp đồng này.</p>
+        <p>Hợp đồng này được lập thành 04 bản mỗi bên giữ 02 bản và có giá trị pháp lý như nhau.</p>
+
+        <div class="signature-box">
+            <div class="signature-col">
+                <span class="bold">ĐẠI DIỆN BÊN A</span><br>
+                (Bên cho thuê đất)<br>
+                <div class="signature-space"></div>
+                <span class="data-field bold Ben_A_Ho_Ten">...</span>
+            </div>
+            <div class="signature-col">
+                <span class="bold">ĐẠI DIỆN BÊN B</span><br>
+                (Bên thuê đất)<br>
+                <div class="signature-space"></div>
+                <span class="bold">Lê Văn Đức</span>
+            </div>
+        </div>
+
+            </div>
+    <div class="print-page">
+        <!-- ================= TRANG 2: BIÊN BẢN BÀN GIAO ================= -->
+
+<div style="line-height: 1.2;">
+            <div class="center bold">
+                CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+                Độc lập - Tự do - Hạnh phúc<br>
+                --------------------
+            </div>
+            <div class="center title">BIÊN BẢN BÀN GIAO MẶT BẰNG</div>
+            <p class="italic">Căn cứ vào hợp đồng số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span> giữa ông/bà <span class="data-field Ben_A_Ho_Ten">...</span> và Viễn thông Phú Thọ.</p>
+            <p>Hôm nay, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>, tại <span class="data-field Ben_A_Dia_Chi">...</span>, chúng tôi gồm:</p>
+            
+            <p class="bold">BÊN A: (BÊN CHO THUÊ)</p>
+            <p>- Người đại diện: Ông/Bà <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+            <p>- Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
+            <p>- Số CCCD: <span class="data-field Ben_A_CCCD">...</span> cấp ngày <span class="data-field Ben_A_Ngay_Cap">...</span> - Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
+            <p>- Điện thoại: <span class="data-field Ben_A_SDT">...</span></p>
+            
+            <p class="bold">BÊN B: (BÊN THUÊ)</p>
+            <p>- Tên doanh nghiệp: <span class="bold">VIỄN THÔNG PHÚ THỌ</span></p>
+            <p>- Người đại diện: Ông Nguyễn Minh Cường</p>
+            <p>- Chức vụ: Phó Giám đốc Trung tâm Hạ tầng site Phú Thọ</p>
+            <p>- Địa chỉ: Số 1468, đường Hùng Vương, phường Thanh Miếu, tỉnh Phú Thọ</p>
+            <p>- Điện thoại: 0210.3882346</p>
+            <p>- Số tài khoản: 110000031172 tại Ngân hàng TMCP Công thương VN – Chi nhánh Phú Thọ</p>
+            <p>- Mã số thuế: 2600102568</p>
+            
+            <p>Sau khi kiểm tra thực tế tại hiện trường, hai bên cùng nhau tiến hành giao nhận vị trí đặt trạm viễn thông với các nội dung như sau:</p>
+            <p>Ông/bà <span class="data-field Ben_A_Ho_Ten">...</span> bàn giao diện tích mặt bằng cho Viễn thông Phú Thọ để xây dựng cơ sở hạ tầng trạm <span class="data-field Vi_Tri_Thue">...</span> với tổng diện tích đất bàn giao cho thuê là <span class="data-field Dien_Tich_Thue">...</span> m2 tại địa chỉ <span class="data-field Ben_A_Dia_Chi">...</span>.</p>
+            
+            <p>Biên bản được lập xong hai bên thông qua và cùng nhất trí ký tên. Biên bản được lập thành 04 bản có giá trị pháp lý như nhau, mỗi bên giữ 02 bản làm cơ sở cho việc thanh toán tiền thuê theo thỏa thuận của hợp đồng.</p>
+            
+            <div class="signature-box">
+                <div class="signature-col">
+                    <span class="bold">ĐẠI DIỆN BÊN A</span><br>
+                    <div class="signature-space"></div>
+                    <span class="data-field bold Ben_A_Ho_Ten">...</span>
+                </div>
+                <div class="signature-col">
+                    <span class="bold">ĐẠI DIỆN BÊN B</span><br>
+                    <div class="signature-space"></div>
+                    <span class="bold">Nguyễn Minh Cường</span>
+                </div>
+            </div>
+        </div>
+
+            </div>
+    <div class="print-page">
+        <!-- ================= TRANG 3: GIẤY ĐỀ NGHỊ THANH TOÁN ================= -->
+
+<div class="center bold">
+            CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+            Độc lập - Tự do - Hạnh phúc<br>
+            --------------------
+        </div>
+        <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+        <div class="center title">GIẤY ĐỀ NGHỊ THANH TOÁN</div>
+        
+        <p class="bold italic">Kính gửi: Viễn thông Phú Thọ</p>
+        <p>Tên tôi là: <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+        <p>Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
+        <p>Số CMND/CCCD: <span class="data-field Ben_A_CCCD">...</span> – cấp ngày: <span class="data-field Ben_A_Ngay_Cap">...</span></p>
+        <p>Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
+        
+        <p>Đề nghị thanh toán số tiền: <span class="data-field So_Tien_Thanh_Toan">...</span> VNĐ</p>
+        <p>(Viết bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span>)</p>
+        
+        <p>Lý do thanh toán: Thanh toán tiền thuê đất đặt trạm <span class="data-field Vi_Tri_Thue">...</span> theo hợp đồng số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></p>
+        
+        <p>Số tiền trên được chuyển khoản như sau:</p>
+        <p>- Người thụ hưởng: <span class="data-field Ben_A_Ho_Ten">...</span></p>
+        <p>- Số tài khoản hưởng: <span class="data-field Ben_A_STK">...</span> - Ngân hàng: <span class="data-field Ben_A_Ngan_Hang">...</span></p>
+        
+        <p>Tôi xin chân thành cảm ơn!</p>
+        
+        <div class="signature-box">
+            <div class="signature-col"></div>
+            <div class="signature-col">
+                <span class="bold">Người đề nghị</span><br>
+                (Ký, ghi rõ họ tên)<br>
+                <div class="signature-space"></div>
+                <span class="data-field bold Ben_A_Ho_Ten">...</span>
+            </div>
+        </div>
+
+            </div>
+    <div class="print-page">
+        <!-- ================= TRANG 4: BẢN CAM KẾT TNCN ================= -->
+
+<table style="width: 100%; border: none; margin-bottom: 20px;">
+            <tr>
+                <td style="width: 15%; border: none;"></td>
+                <td style="width: 60%; text-align: center; vertical-align: top; border: none;">
+                    <div class="bold" style="font-size: 13pt; white-space: nowrap;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="bold" style="font-size: 13pt; text-decoration: underline;">Độc lập - Tự do - Hạnh phúc</div>
+                </td>
+                <td style="width: 25%; text-align: center; vertical-align: top; border: none;">
+                    <div style="border: 1px solid black; padding: 5px; font-size: 9pt; line-height: 1.2;">
+                        Mẫu số: <span class="bold">08/CK-TNCN</span><br>
+                        <span class="italic">(Ban hành kèm theo Thông tư số 80/2021/TT-BTC ngày 29/9/2021 của Bộ trưởng Bộ Tài chính)</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="center title" style="margin-top: 10px;">BẢN CAM KẾT</div>
+        <div class="center italic">(Áp dụng khi cá nhân nhận thu nhập và ước tính tổng thu nhập trong năm dương lịch chưa đến mức chịu thuế TNCN)</div>
+        <br>
+        <div class="bold center" style="font-size: 13pt; margin-bottom: 15px;">Kính gửi: VIỄN THÔNG PHÚ THỌ</div>
+        
+        <p>1. Tên tôi là: <span class="data-field Ben_A_Ho_Ten">...</span></p>
+        <div class="mst-container" style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+            <span>2. Mã số thuế:</span>
+            <div style="display: flex; margin-left: 15px;">
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div style="width: 15px;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+                <div class="mst-char" style="width: 25px; height: 30px; border: 1px solid black; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13pt; font-family: 'Times New Roman', Times, serif;"></div>
+            </div>
+        </div>
+        <p>3. Địa chỉ cư trú: <span class="data-field Ben_A_Dia_Chi">...</span></p>
+        
+        <p>Tôi cam kết rằng, năm <span class="data-field Ngay_Ky_Year">...</span> tôi có tổng thu nhập từ tiền lương, tiền công thuộc diện phải khấu trừ thuế theo tỷ lệ 10%, nhưng theo ước tính tổng thu nhập trong năm của tôi không quá 186 triệu đồng (ghi bằng chữ: Một trăm tám mươi sáu triệu đồng) chưa đến mức phải nộp thuế TNCN. Vì vậy, tôi đề nghị Viễn thông Phú Thọ căn cứ vào bản cam kết này để không khấu trừ thuế TNCN khi trả thu nhập cho tôi.</p>
+        
+        <p>Tôi chịu trách nhiệm trước pháp luật về những số liệu đã khai./.</p>
+        
+        <div class="signature-box">
+            <div class="signature-col"></div>
+            <div class="signature-col">
+                <span class="italic">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></span><br>
+                <span class="bold">CÁ NHÂN CAM KẾT</span><br>
+                (Ký, ghi rõ họ tên)<br>
+                <div class="signature-space"></div>
+                <span class="data-field bold Ben_A_Ho_Ten">...</span>
+            </div>
+        </div>
+        <br><br>
+        <p class="italic" style="font-size: 11pt;">
+        Ghi chú: (*) Số tiền khai tại mục này được xác định bằng mức giảm trừ gia cảnh được tính trong năm:<br>
+        VD:<br>
+        - Trường hợp người cam kết không có người phụ thuộc: số tiền khai là 15,5 triệu đồng x 12 tháng = 186 triệu đồng.<br>
+        - Trường hợp người cam kết có 01 người phụ thuộc thực tế phải nuôi dưỡng trong năm là 10 tháng:<br>
+        Số tiền khai = 186 triệu đồng + 6,2 triệu đồng x 10 tháng = 248 triệu<br>
+        (Điều 1 Nghị quyết 110/2025/UBTVQH15)
+        </p>
+
+            </div>
+    <div class="print-page">
+        <!-- ================= TRANG 5: GIẤY ỦY QUYỀN ================= -->
+
+<div class="center bold">
+            CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+            Độc lập - Tự do - Hạnh phúc<br>
+            --------------------
+        </div>
+        <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+        <div class="center title">GIẤY ỦY QUYỀN</div>
+        <p>Tôi tên là: <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+        <p>Số CCCD: <span class="data-field Ben_A_CCCD">...</span> - cấp ngày <span class="data-field Ben_A_Ngay_Cap">...</span></p>
+        <p>Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
+        <p>Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
+        <p>SĐT: <span class="data-field Ben_A_SDT">...</span></p>
+        
+        <p>Căn cứ hợp đồng thuê đất số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span> giữa ông/bà <span class="data-field Ben_A_Ho_Ten">...</span> và Trung tâm Hạ tầng – VNPT Phú Thọ. Nay bằng văn bản này tôi ủy quyền cho Ông Đào Quang Tuyến (CCDC: 025072002273 Ngày cấp: 16/04/2021. Nơi cấp: Cục cảnh sát quản lý hành chính về trật tự xã hội) nhận tiền thanh toán cho thuê đất sử dụng để treo thiết bị viễn thông, phụ trợ RRU, nguồn AC....</p>
+        
+        <p>Đề nghị quý cơ quan thanh toán theo số tài khoản sau:</p>
+        <p>- Người thụ hưởng: Đào Quang Tuyến</p>
+        <p>- Số tài khoản hưởng: 42810000768068 tại ngân hàng BIDV</p>
+        
+        <p>Thời hạn ủy quyền từ ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span> đến khi có văn bản thay thế.</p>
+        <p>Tôi xin chân thành cảm ơn!</p>
+        
+        <div class="signature-box">
+            <div class="signature-col">
+                <span class="bold">Người nhận ủy quyền</span><br>
+                <div class="signature-space"></div>
+                <span class="bold">Đào Quang Tuyến</span>
+            </div>
+            <div class="signature-col">
+                <span class="bold">Người ủy quyền</span><br>
+                <div class="signature-space"></div>
+                <span class="data-field bold Ben_A_Ho_Ten">...</span>
+            </div>
+        </div>
+
+            </div>
+    <div class="print-page">
+        <!-- ================= TRANG 6: GIẤY ĐỀ NGHỊ THANH TOÁN (Nội bộ VNPT) ================= -->
+
+<table style="width: 100%; border: none; margin-bottom: 20px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 35%; text-align: center; border: none; vertical-align: top;">
+                    <span style="font-size: 13pt;">VIỄN THÔNG PHÚ THỌ</span><br>
+                    <span class="bold" style="font-size: 13pt; text-decoration: underline;">TRUNG TÂM HẠ TẦNG</span>
+                </td>
+                <td style="width: 65%; text-align: center; border: none; vertical-align: top;">
+                    <span class="bold" style="font-size: 13pt; white-space: nowrap;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</span><br>
+                    <span class="bold" style="font-size: 13pt; text-decoration: underline;">Độc lập - Tự do - Hạnh phúc</span><br>
+                    <span class="italic" style="font-size: 13pt; display: block; margin-top: 5px;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></span>
+                </td>
+            </tr>
+        </table>
+        <div class="center title">GIẤY ĐỀ NGHỊ THANH TOÁN</div>
+        
+        <p class="bold italic">Kính gửi: Lãnh đạo Viễn thông Phú Thọ</p>
+        <p>Tên tôi là: Nguyễn Thu Trang</p>
+        <p>Bộ phận: Tổ tổng hợp - Đơn vị: Trung tâm hạ tầng</p>
+        <p>Nội dung thanh toán:</p>
+        <table class="table-custom">
+            <tr>
+                <th>STT</th>
+                <th>Nội dung thanh toán</th>
+                <th>Số tiền</th>
+                <th>Ghi chú</th>
+            </tr>
+            <tr>
+                <td class="center">1</td>
+                <td>Thanh toán tiền thuê đất XD trạm BTS: Trạm <span class="data-field Vi_Tri_Thue">...</span> theo HĐ số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></td>
+                <td class="center"><span class="data-field So_Tien_Thanh_Toan">...</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="bold center">Cộng</td>
+                <td class="bold center"><span class="data-field So_Tien_Thanh_Toan">...</span></td>
+                <td></td>
+            </tr>
+        </table>
+        
+        <p>Số tiền bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span></p>
+        <p>Hình thức thanh toán: chuyển khoản</p>
+        <p>Đơn vị/người thụ hưởng: Đào Quang Tuyến</p>
+        <p>Tài khoản thụ hưởng: 42810000768068</p>
+        <p>Ngân hàng thụ hưởng: ngân hàng BIDV</p>
+        
+        <table style="width: 100%; text-align: center; margin-top: 10px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 33.33%; border: none;" class="bold">Người đề nghị</td>
+                <td style="width: 33.33%; border: none;" class="bold">Nhân viên kế toán</td>
+                <td style="width: 33.33%; border: none;" class="bold">Giám đốc</td>
+            </tr>
+            <tr>
+                <td style="height: 80px; border: none;"></td>
+                <td style="border: none;"></td>
+                <td style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border: none;" class="bold">Nguyễn Thu Trang</td>
+                <td style="border: none;" class="bold">Nguyễn Thị Phương Anh</td>
+                <td style="border: none;" class="bold">Lê Văn Đức</td>
+            </tr>
+        </table>
+        
+        <div style="margin-top: 15px; margin-left: 10%;">
+            <span class="bold">DUYỆT THANH TOÁN:</span><br>
+            Số tiền bằng số: <span class="data-field bold So_Tien_Thanh_Toan">...</span><br>
+            Bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span>
+        </div>
+        
+        <table style="width: 100%; text-align: center; margin-top: 15px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 50%; border: none;" class="bold">KẾ TOÁN TRƯỞNG</td>
+                <td style="width: 50%; border: none;" class="bold">GIÁM ĐỐC VIỄN THÔNG PHÚ THỌ</td>
+            </tr>
+            <tr>
+                <td style="height: 80px; border: none;"></td>
+                <td style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border: none;" class="bold">Nguyễn Đăng Minh</td>
+                <td style="border: none;" class="bold">Nguyễn Việt Hùng</td>
+            </tr>
+        </table>
+    </div>
+
+    </div>
+    <script>
+        // BƯỚC 1: ĐIỀN ĐƯỜNG DẪN WEB APP GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
+        const API_URL = "https://script.google.com/macros/s/AKfycbz5zkbEhwo0SyltYy77nPN91HAMEoFhNy5V3GSaveX2iaLM5RevCvuOfzBupiTnSFtn/exec";
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const idHopDong = urlParams.get('id');
+
+        if (!idHopDong) {
+            document.getElementById('loading').innerHTML = "Lỗi: Không tìm thấy ID Hợp đồng trong đường dẫn (URL).";
+        } else {
+            fetch(`${API_URL}?id=${idHopDong}`)
+                .then(response => response.json())
+                .then(res => {
+                    if (res.success) {
+                        const data = res.data;
+                        
+                        // Hàm helper để gán dữ liệu vào tất cả các thẻ có class tương ứng
+                        const setTextForAll = (className, text) => {
+                            const els = document.querySelectorAll('.' + className);
+                            els.forEach(el => {
+                                el.innerText = text || '...';
+                            });
+                        };
+
+                        setTextForAll('So_Hop_Dong', data.SoHopDong);
+                        setTextForAll('Ben_A_Ho_Ten', data.HoTen);
+                        setTextForAll('Ben_A_CCCD', data.CCCD);
+                        setTextForAll('Ben_A_Noi_Cap', 'Cục cảnh sát QLHC về TTXH'); // Dữ liệu API không có Nơi Cấp
+                        setTextForAll('Ben_A_Dia_Chi', data.DiaChiThuongTru);
+                        setTextForAll('Ben_A_SDT', '0' + data.SoDienThoai);
+                        setTextForAll('Ben_A_STK', data.SoTaiKhoan);
+                        setTextForAll('Ben_A_Ngan_Hang', data.NganHang);
+                        setTextForAll('Vi_Tri_Thue', data.TenTram);
+                        setTextForAll('Ma_Tram', data.MaTram || idHopDong);
+                        setTextForAll('Dien_Tich_Thue', data.DienTichThue_m2);
+                        
+                        let thoiHan = data.ThoiHanNam;
+                        if(thoiHan && thoiHan.toString().includes('(')) {
+                            thoiHan = thoiHan.toString().split('(')[0].trim();
+                        }
+                        setTextForAll('Thoi_Han_Thue', thoiHan);
+                        
+                        const docTienBangChu = (function() {
+                            var mangso = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+                            function dochangchuc(so, daydu) {
+                                var chuoi = "";
+                                var chuc = Math.floor(so / 10);
+                                var donvi = so % 10;
+                                if (chuc > 1) {
+                                    chuoi = " " + mangso[chuc] + " mươi";
+                                    if (donvi == 1) { chuoi += " mốt"; }
+                                } else if (chuc == 1) {
+                                    chuoi = " mười";
+                                    if (donvi == 1) { chuoi += " một"; }
+                                } else if (daydu && donvi > 0) {
+                                    chuoi = " lẻ";
+                                }
+                                if (donvi == 5 && chuc >= 1) {
+                                    chuoi += " lăm";
+                                } else if (donvi == 4 && chuc >= 1) {
+                                    chuoi += " tư";
+                                } else if (donvi > 0 && (donvi != 1 || chuc == 0)) {
+                                    chuoi += " " + mangso[donvi];
+                                }
+                                return chuoi;
+                            }
+                            function docblock(so, daydu) {
+                                var chuoi = "";
+                                var tram = Math.floor(so / 100);
+                                so = so % 100;
+                                if (daydu || tram > 0) {
+                                    chuoi = " " + mangso[tram] + " trăm";
+                                    chuoi += dochangchuc(so, true);
+                                } else {
+                                    chuoi = dochangchuc(so, false);
+                                }
+                                return chuoi;
+                            }
+                            function dochangtrieu(so, daydu) {
+                                var chuoi = "";
+                                var trieu = Math.floor(so / 1000000);
+                                so = so % 1000000;
+                                if (trieu > 0) {
+                                    chuoi = docblock(trieu, daydu) + " triệu";
+                                    daydu = true;
+                                }
+                                var nghin = Math.floor(so / 1000);
+                                so = so % 1000;
+                                if (nghin > 0) {
+                                    chuoi += docblock(nghin, daydu) + " nghìn";
+                                    daydu = true;
+                                }
+                                if (so > 0) {
+                                    chuoi += docblock(so, daydu);
+                                }
+                                return chuoi;
+                            }
+                            return function(so) {
+                                if (so == 0) return mangso[0] + " đồng chẵn";
+                                var chuoi = "", hauto = "";
+                                do {
+                                    var ty = so % 1000000000;
+                                    so = Math.floor(so / 1000000000);
+                                    if (so > 0) {
+                                        chuoi = dochangtrieu(ty, true) + hauto + chuoi;
+                                    } else {
+                                        chuoi = dochangtrieu(ty, false) + hauto + chuoi;
+                                    }
+                                    hauto = " tỷ";
+                                } while (so > 0);
+                                
+                                let result = chuoi.trim();
+                                if (result.length > 0) {
+                                    result = result.charAt(0).toUpperCase() + result.slice(1);
+                                }
+                                return result + " đồng chẵn";
+                            }
+                        })();
+
+                        // Định dạng tiền tệ
+                        if (data.GiaThueThang) {
+                            const giaThang = Number(data.GiaThueThang);
+                            setTextForAll('Gia_Thue_Thang', giaThang.toLocaleString('vi-VN'));
+                            setTextForAll('Gia_Thue_Chu', docTienBangChu(giaThang));
+                        }
+                        
+                        if (data.SotienThanhToan) {
+                            const soTien = Number(data.SotienThanhToan);
+                            setTextForAll('So_Tien_Thanh_Toan', soTien.toLocaleString('vi-VN'));
+                            setTextForAll('So_Tien_Chu', docTienBangChu(soTien));
+                        } else if (data.GiaThueThang) {
+                            const giaThang = Number(data.GiaThueThang);
+                            const tongTien = giaThang * 12;
+                            setTextForAll('So_Tien_Thanh_Toan', tongTien.toLocaleString('vi-VN'));
+                            setTextForAll('So_Tien_Chu', docTienBangChu(tongTien));
+                        }
+
+                        // Xử lý ngày tháng
+                        if (data.NgayKyHD) {
+                            const date = new Date(data.NgayKyHD);
+                            if (!isNaN(date.getTime())) {
+                                setTextForAll('Ngay_Ky_Day', date.getDate().toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Ky_Month', (date.getMonth() + 1).toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Ky_Year', date.getFullYear());
+                            }
+                        }
+                        if (data.CCCD_NgayCap) {
+                            const dateCap = new Date(data.CCCD_NgayCap);
+                            if (!isNaN(dateCap.getTime())) {
+                                setTextForAll('Ben_A_Ngay_Cap', dateCap.toLocaleDateString('vi-VN'));
+                            }
+                        }
+                        
+                        // Tự động điền số CCCD vào các ô Mã số thuế
+                        // Tự động điền số CCCD vào các ô Mã số thuế
+                        if (data.CCCD) {
+                            const cccdStr = String(data.CCCD).trim();
+                            const mstBoxes = document.querySelectorAll('.mst-char');
+                            for (let i = 0; i < cccdStr.length && i < mstBoxes.length; i++) {
+                                mstBoxes[i].innerText = cccdStr[i];
+                            }
+                        }
+
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('action-buttons').style.display = 'block';
+                        document.getElementById('content').style.display = 'block';
+                        
+                        // Tự động bật hộp thoại in
+                        setTimeout(() => {
+                            window.print();
+                        }, 500);
+
+                    } else {
+                        document.getElementById('loading').innerHTML = "Lỗi: Không tìm thấy hợp đồng " + idHopDong;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loading').innerHTML = "Lỗi kết nối máy chủ: " + error.message;
+                });
+        }
+
+        function exportHTMLToDoc() {
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->";
+            var style = "<style>@page Section1 { size: 210mm 297mm; margin: 15mm 20mm 15mm 20mm; mso-page-orientation: portrait; mso-header-margin: 35.4pt; mso-footer-margin: 35.4pt; mso-paper-source: 0; } div.Section1 { page: Section1; } body { font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.3; } p { margin: 5px 0; text-align: justify; } .center { text-align: center; } .bold { font-weight: bold; } .italic { font-style: italic; } .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; } table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid black; padding: 5px; } .table-custom td, .table-custom th { border: 1px solid black; } .signature-space { height: 100px; }</style>";
+            var contentClone = document.getElementById('content').cloneNode(true);
+            
+            // Inject inline styles for MS Word compatibility
+            contentClone.querySelectorAll('.bold').forEach(el => el.style.fontWeight = 'bold');
+            contentClone.querySelectorAll('.italic').forEach(el => el.style.fontStyle = 'italic');
+            contentClone.querySelectorAll('.center').forEach(el => el.style.textAlign = 'center');
+            contentClone.querySelectorAll('.title').forEach(el => {
+                el.style.fontWeight = 'bold';
+                el.style.fontSize = '16pt';
+                el.style.textAlign = 'center';
+            });
+            
+            contentClone.querySelectorAll('.signature-space').forEach(el => {
+                el.innerHTML = '<br><br><br><br><br>';
+            });
+            
+            var sigBoxes = contentClone.querySelectorAll('.signature-box');
+            sigBoxes.forEach(box => {
+                var cols = box.querySelectorAll('.signature-col');
+                var table = document.createElement('table');
+                table.style.width = '100%';
+                table.style.border = 'none';
+                var tr = document.createElement('tr');
+                cols.forEach(col => {
+                    var td = document.createElement('td');
+                    td.style.width = (100 / cols.length) + '%';
+                    td.style.textAlign = 'center';
+                    td.style.verticalAlign = 'top';
+                    td.style.border = 'none';
+                    td.innerHTML = col.innerHTML;
+                    tr.appendChild(td);
+                });
+                table.appendChild(tr);
+                box.parentNode.replaceChild(table, box);
+            });
+
+            // Xử lý ngắt trang cho MS Word
+            var printPages = contentClone.querySelectorAll('.print-page');
+            printPages.forEach((pp, index) => {
+                if (index > 0) {
+                    // Chèn ngắt trang Word chuẩn trước mỗi trang (trừ trang đầu)
+                    var pbDiv = document.createElement('div');
+                    pbDiv.innerHTML = '<br clear="all" style="mso-special-character:line-break;page-break-before:always">';
+                    pp.parentNode.insertBefore(pbDiv, pp);
+                }
+                // Unwrap: thay thế div.print-page bằng nội dung bên trong
+                // để Word không bị lẫn lộn bởi div lồng nhau
+                while (pp.firstChild) {
+                    pp.parentNode.insertBefore(pp.firstChild, pp);
+                }
+                pp.parentNode.removeChild(pp);
+            });
+            var mstContainer = contentClone.querySelector('.mst-container');
+            if (mstContainer) {
+                var mstTable = document.createElement('table');
+                mstTable.style.width = 'auto';
+                mstTable.style.borderCollapse = 'collapse';
+                mstTable.style.marginTop = '10px';
+                mstTable.style.marginBottom = '10px';
+                mstTable.style.border = 'none';
+                var tr1 = document.createElement('tr');
+                var tdLabel = document.createElement('td');
+                tdLabel.style.border = 'none';
+                tdLabel.innerHTML = '2. Mã số thuế: &nbsp;&nbsp;';
+                tr1.appendChild(tdLabel);
+                
+                var chars = mstContainer.querySelectorAll('.mst-char');
+                chars.forEach((c, idx) => {
+                    var tdChar = document.createElement('td');
+                    tdChar.style.border = '1px solid black';
+                    tdChar.style.width = '25px';
+                    tdChar.style.height = '30px';
+                    tdChar.style.textAlign = 'center';
+                    tdChar.style.fontWeight = 'bold';
+                    tdChar.style.fontSize = '13pt';
+                    tdChar.innerHTML = c.innerText;
+                    if (idx === 9) {
+                        tdChar.style.borderRight = '1px solid black';
+                        tr1.appendChild(tdChar);
+                        var tdSpace = document.createElement('td');
+                        tdSpace.style.border = 'none';
+                        tdSpace.style.width = '15px';
+                        tr1.appendChild(tdSpace);
+                    } else {
+                        if (idx < 9 || idx === 10) tdChar.style.borderRight = 'none';
+                        tr1.appendChild(tdChar);
+                    }
+                });
+                mstTable.appendChild(tr1);
+                mstContainer.parentNode.replaceChild(mstTable, mstContainer);
+            }
+            
+            var html = header + style + "</head><body><div class='Section1'>" + contentClone.innerHTML + "</div></body></html>";
+            
+            var blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+            var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'Hop_Dong';
+            if (soHD === '...') soHD = 'HopDong';
+            soHD = soHD.replace(/[/\\?%*:|"<>]/g, '-');
+            
+            var filename = soHD + '.doc';
+            var downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+            
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = filename;
+                downloadLink.click();
+            }
+            document.body.removeChild(downloadLink);
+        }
+
+        function exportHTMLToPDF() {
+            var element = document.getElementById('content');
+            
+            var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'Hop_Dong';
+            if (soHD === '...') soHD = 'HopDong';
+            soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
+            var filename = soHD + '.pdf';
+            
+            // A4 = 210mm, margin trái 20mm + phải 20mm = vùng in 170mm
+            // 170mm ở 96dpi ≈ 643px. Đặt windowWidth = 643 để nội dung vừa khít vùng in.
+            // Tạm thời mở rộng .print-page width = 100% để nội dung tràn đầy viewport ảo.
+            var printPages = document.querySelectorAll('.print-page');
+            var originalWidths = [];
+            printPages.forEach(function(pp) {
+                originalWidths.push(pp.style.width);
+                pp.style.width = '100%';
+            });
+            
+            var opt = {
+              margin:       [15, 20, 15, 20],
+              filename:     filename,
+              image:        { type: 'jpeg', quality: 0.98 },
+              html2canvas:  { 
+                  useCORS: true,
+                  scale: 2,
+                  windowWidth: 643,
+                  scrollX: 0,
+                  scrollY: 0
+              },
+              jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+              pagebreak:    { mode: 'css', avoid: ['p', 'tr', 'li', '.bold', '.center', '.signature-box', 'table'] }
+            };
+            
+            document.getElementById('action-buttons').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
+            
+            html2pdf().set(opt).from(element).save().then(function() {
+                // Khôi phục width gốc
+                printPages.forEach(function(pp, i) {
+                    pp.style.width = originalWidths[i] || '';
+                });
+                document.getElementById('action-buttons').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+            }).catch(function(err) {
+                // Khôi phục width gốc khi lỗi
+                printPages.forEach(function(pp, i) {
+                    pp.style.width = originalWidths[i] || '';
+                });
+                console.error(err);
+                document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
+                document.getElementById('action-buttons').style.display = 'block';
+            });
+        }
+</script>
+</body>
+</html>
