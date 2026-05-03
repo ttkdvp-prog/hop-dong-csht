@@ -768,6 +768,7 @@
         }
 
         function exportHTMLToPDF() {
+            var element = document.getElementById('content');
             var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'Hop_Dong';
             if (soHD === '...') soHD = 'HopDong';
             soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
@@ -777,49 +778,61 @@
             document.getElementById('loading').style.display = 'block';
             document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
             
-            // Clone nội dung vào container tạm để tránh ảnh hưởng layout gốc
-            var clone = document.getElementById('content').cloneNode(true);
-            clone.style.display = 'block';
+            // Lưu style gốc
+            var origStyle = element.style.cssText;
+            var printPages = element.querySelectorAll('.print-page');
+            var origPageStyles = [];
+            printPages.forEach(function(pp) {
+                origPageStyles.push(pp.style.cssText);
+            });
             
-            // Container tạm: width cố định 645px, không centering, nằm ngoài viewport
-            var wrapper = document.createElement('div');
-            wrapper.style.cssText = 'position:fixed; left:0; top:0; width:645px; z-index:-9999; background:white;';
+            // === CÁCH MỚI: bỏ margin trái/phải của html2pdf ===
+            // Thay bằng padding trực tiếp trên #content
+            // A4 = 210mm = 794px (96dpi). Padding 20mm = 76px mỗi bên.
+            // Nội dung nằm trong 794 - 76*2 = 642px (≈170mm vùng in)
+            element.style.width = '794px';
+            element.style.padding = '0 76px';
+            element.style.boxSizing = 'border-box';
+            element.style.overflow = 'hidden';
+            element.style.background = 'white';
             
-            // Bỏ margin auto centering trên các .print-page trong clone
-            clone.querySelectorAll('.print-page').forEach(function(pp) {
+            printPages.forEach(function(pp) {
                 pp.style.width = '100%';
                 pp.style.margin = '0';
             });
             
-            wrapper.appendChild(clone);
-            document.body.appendChild(wrapper);
-            
             var opt = {
-              margin:       [15, 20, 15, 20],
+              margin:       [15, 0, 15, 0],
               filename:     filename,
               image:        { type: 'jpeg', quality: 0.98 },
               html2canvas:  { 
                   useCORS: true,
                   scale: 2,
-                  windowWidth: 645
+                  windowWidth: 794
               },
               jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
               pagebreak:    { mode: 'css', avoid: ['p', 'tr', 'li', '.bold', '.center', '.signature-box', 'table'] }
             };
             
-            // Chờ DOM render clone trước khi capture
+            function restoreStyles() {
+                element.style.cssText = origStyle;
+                printPages.forEach(function(pp, i) {
+                    pp.style.cssText = origPageStyles[i] || '';
+                });
+            }
+            
             setTimeout(function() {
-                html2pdf().set(opt).from(clone).save().then(function() {
-                    document.body.removeChild(wrapper);
+                html2pdf().set(opt).from(element).save().then(function() {
+                    restoreStyles();
                     document.getElementById('action-buttons').style.display = 'block';
                     document.getElementById('loading').style.display = 'none';
                 }).catch(function(err) {
-                    document.body.removeChild(wrapper);
+                    restoreStyles();
                     console.error(err);
                     document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
                     document.getElementById('action-buttons').style.display = 'block';
                 });
-            }, 200);
+            }, 100);
         }
 </script>
 </body>
