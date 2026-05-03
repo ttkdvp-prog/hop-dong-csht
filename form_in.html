@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In Hợp Đồng Thuê CSHT</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @page {
             size: A4;
@@ -768,7 +769,6 @@
         }
 
         function exportHTMLToPDF() {
-            var element = document.getElementById('content');
             var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'Hop_Dong';
             if (soHD === '...') soHD = 'HopDong';
             soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
@@ -778,57 +778,50 @@
             document.getElementById('loading').style.display = 'block';
             document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
             
+            var printPages = document.querySelectorAll('#content .print-page');
+            
             // Lưu style gốc
-            var origContentStyle = element.style.cssText;
-            var printPages = element.querySelectorAll('.print-page');
-            var origPageStyles = [];
+            var origStyles = [];
             printPages.forEach(function(pp) {
-                origPageStyles.push(pp.style.cssText);
-            });
-            
-            // Đặt #content width = 645px (khớp với .print-page CSS)
-            // để html2canvas capture đúng kích thước nội dung
-            element.style.width = '645px';
-            
-            // Bỏ margin:0 auto → nội dung bắt đầu từ x=0
-            printPages.forEach(function(pp) {
+                origStyles.push(pp.style.cssText);
                 pp.style.margin = '0';
             });
             
-            var opt = {
-              margin:       [15, 20, 15, 20],
-              filename:     filename,
-              image:        { type: 'jpeg', quality: 0.98 },
-              html2canvas:  { 
-                  useCORS: true,
-                  scale: 2,
-                  windowWidth: 645
-              },
-              jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-              pagebreak:    { mode: 'css', avoid: ['p', 'tr', 'li', '.bold', '.center', '.signature-box', 'table'] }
-            };
+            // Render từng trang riêng biệt bằng html2canvas
+            var promises = [];
+            printPages.forEach(function(pp) {
+                promises.push(html2canvas(pp, { scale: 2, useCORS: true }));
+            });
             
-            function restoreStyles() {
-                element.style.cssText = origContentStyle;
+            Promise.all(promises).then(function(canvases) {
+                var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+                var marginTop = 15, marginLeft = 20;
+                var innerWidth = 170; // 210 - 20 - 20
+                
+                canvases.forEach(function(canvas, i) {
+                    if (i > 0) pdf.addPage();
+                    var imgData = canvas.toDataURL('image/jpeg', 0.98);
+                    var imgHeight = canvas.height * innerWidth / canvas.width;
+                    pdf.addImage(imgData, 'JPEG', marginLeft, marginTop, innerWidth, imgHeight);
+                });
+                
+                pdf.save(filename);
+                
+                // Khôi phục style gốc
                 printPages.forEach(function(pp, i) {
-                    pp.style.cssText = origPageStyles[i] || '';
+                    pp.style.cssText = origStyles[i] || '';
                 });
-            }
-            
-            setTimeout(function() {
-                html2pdf().set(opt).from(element).save().then(function() {
-                    restoreStyles();
-                    document.getElementById('action-buttons').style.display = 'block';
-                    document.getElementById('loading').style.display = 'none';
-                }).catch(function(err) {
-                    restoreStyles();
-                    console.error(err);
-                    document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
-                    document.getElementById('action-buttons').style.display = 'block';
+                document.getElementById('action-buttons').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+            }).catch(function(err) {
+                printPages.forEach(function(pp, i) {
+                    pp.style.cssText = origStyles[i] || '';
                 });
-            }, 100);
+                console.error(err);
+                document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
+                document.getElementById('action-buttons').style.display = 'block';
+            });
         }
 </script>
 </body>
 </html>
-
