@@ -768,33 +768,31 @@
         }
 
         function exportHTMLToPDF() {
-            var element = document.getElementById('content');
-            
             var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'Hop_Dong';
             if (soHD === '...') soHD = 'HopDong';
             soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
             var filename = soHD + '.pdf';
             
-            // === Tạm thời điều chỉnh layout để html2canvas capture chính xác ===
-            // Nguyên nhân lỗi: .print-page có margin:0 auto (centering) khiến
-            // html2canvas capture từ vị trí offset trong DOM → bị cắt chữ.
-            // Fix: bỏ centering, đặt width cố định, position absolute left:0
+            document.getElementById('action-buttons').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
             
-            var printPages = document.querySelectorAll('.print-page');
-            var origPageStyles = [];
-            printPages.forEach(function(pp) {
-                origPageStyles.push(pp.style.cssText);
+            // Clone nội dung vào container tạm để tránh ảnh hưởng layout gốc
+            var clone = document.getElementById('content').cloneNode(true);
+            clone.style.display = 'block';
+            
+            // Container tạm: width cố định 645px, không centering, nằm ngoài viewport
+            var wrapper = document.createElement('div');
+            wrapper.style.cssText = 'position:fixed; left:0; top:0; width:645px; z-index:-9999; background:white;';
+            
+            // Bỏ margin auto centering trên các .print-page trong clone
+            clone.querySelectorAll('.print-page').forEach(function(pp) {
                 pp.style.width = '100%';
                 pp.style.margin = '0';
-                pp.style.padding = '0';
             });
             
-            // Đặt #content width cố định và vị trí bắt đầu từ left=0
-            var origContentStyle = element.style.cssText;
-            element.style.width = '645px';
-            element.style.position = 'absolute';
-            element.style.left = '0';
-            element.style.top = document.getElementById('action-buttons').offsetHeight + 'px';
+            wrapper.appendChild(clone);
+            document.body.appendChild(wrapper);
             
             var opt = {
               margin:       [15, 20, 15, 20],
@@ -803,41 +801,25 @@
               html2canvas:  { 
                   useCORS: true,
                   scale: 2,
-                  windowWidth: 645,
-                  scrollX: 0,
-                  scrollY: 0,
-                  x: 0,
-                  y: 0
+                  windowWidth: 645
               },
               jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
               pagebreak:    { mode: 'css', avoid: ['p', 'tr', 'li', '.bold', '.center', '.signature-box', 'table'] }
             };
             
-            document.getElementById('action-buttons').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
-            
-            // Chờ DOM reflow trước khi capture
+            // Chờ DOM render clone trước khi capture
             setTimeout(function() {
-                html2pdf().set(opt).from(element).save().then(function() {
-                    // Khôi phục style gốc
-                    element.style.cssText = origContentStyle;
-                    printPages.forEach(function(pp, i) {
-                        pp.style.cssText = origPageStyles[i] || '';
-                    });
+                html2pdf().set(opt).from(clone).save().then(function() {
+                    document.body.removeChild(wrapper);
                     document.getElementById('action-buttons').style.display = 'block';
                     document.getElementById('loading').style.display = 'none';
                 }).catch(function(err) {
-                    // Khôi phục style gốc khi lỗi
-                    element.style.cssText = origContentStyle;
-                    printPages.forEach(function(pp, i) {
-                        pp.style.cssText = origPageStyles[i] || '';
-                    });
+                    document.body.removeChild(wrapper);
                     console.error(err);
                     document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
                     document.getElementById('action-buttons').style.display = 'block';
                 });
-            }, 100);
+            }, 200);
         }
 </script>
 </body>
