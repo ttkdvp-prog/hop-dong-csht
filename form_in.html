@@ -363,11 +363,11 @@
         <p>Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
         <p>SĐT: <span class="data-field Ben_A_SDT">...</span></p>
         
-        <p>Căn cứ hợp đồng thuê đất số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span> giữa <span class="data-field Ben_A_Danh_Xung">ông/bà</span> <span class="data-field Ben_A_Ho_Ten">...</span> và Trung tâm Hạ tầng – VNPT Phú Thọ. Nay bằng văn bản này tôi ủy quyền cho Ông Đào Quang Tuyến (CCDC: 025072002273 Ngày cấp: 16/04/2021. Nơi cấp: Cục cảnh sát quản lý hành chính về trật tự xã hội) nhận tiền thanh toán cho thuê đất sử dụng để treo thiết bị viễn thông, phụ trợ RRU, nguồn AC....</p>
+        <p>Căn cứ hợp đồng thuê đất số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span> giữa <span class="data-field Ben_A_Danh_Xung">ông/bà</span> <span class="data-field Ben_A_Ho_Ten">...</span> và Trung tâm Hạ tầng – VNPT Phú Thọ. Nay bằng văn bản này tôi ủy quyền cho ông/bà <span class="data-field UQ_HoTen bold">...</span> (CCCD: <span class="data-field UQ_CCCD">...</span> Ngày cấp: <span class="data-field UQ_CCCD_NgayCap">...</span>. Nơi cấp: Cục cảnh sát quản lý hành chính về trật tự xã hội. Địa chỉ: <span class="data-field UQ_DiaChi">...</span>. SĐT: <span class="data-field UQ_SoDienThoai">...</span>) nhận tiền thanh toán cho thuê đất sử dụng để treo thiết bị viễn thông, phụ trợ RRU, nguồn AC....</p>
         
         <p>Đề nghị quý cơ quan thanh toán theo số tài khoản sau:</p>
-        <p>- Người thụ hưởng: Đào Quang Tuyến</p>
-        <p>- Số tài khoản hưởng: 42810000768068 tại ngân hàng BIDV</p>
+        <p>- Người thụ hưởng: <span class="data-field UQ_HoTen">...</span></p>
+        <p>- Số tài khoản hưởng: <span class="data-field UQ_SoTaiKhoan">...</span> tại ngân hàng <span class="data-field UQ_NganHang">...</span></p>
         
         <p>Thời hạn ủy quyền từ ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span> đến khi có văn bản thay thế.</p>
         <p>Tôi xin chân thành cảm ơn!</p>
@@ -376,7 +376,7 @@
             <div class="signature-col">
                 <span class="bold">Người nhận ủy quyền</span><br>
                 <div class="signature-space"></div>
-                <span class="bold">Đào Quang Tuyến</span>
+                <span class="data-field bold UQ_HoTen">...</span>
             </div>
             <div class="signature-col">
                 <span class="bold">Người ủy quyền</span><br>
@@ -430,9 +430,9 @@
         
         <p>Số tiền bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span></p>
         <p>Hình thức thanh toán: chuyển khoản</p>
-        <p>Đơn vị/người thụ hưởng: Đào Quang Tuyến</p>
-        <p>Tài khoản thụ hưởng: 42810000768068</p>
-        <p>Ngân hàng thụ hưởng: ngân hàng BIDV</p>
+        <p>Đơn vị/người thụ hưởng: <span class="data-field UQ_HoTen">...</span></p>
+        <p>Tài khoản thụ hưởng: <span class="data-field UQ_SoTaiKhoan">...</span></p>
+        <p>Ngân hàng thụ hưởng: <span class="data-field UQ_NganHang">...</span></p>
         
         <table style="width: 100%; text-align: center; margin-top: 10px; border-collapse: collapse;">
             <tr>
@@ -524,6 +524,13 @@
                         setTextForAll('Ma_Tram', data.MaTram || idHopDong);
                         setTextForAll('Dien_Tich_Thue', data.DienTichThue_m2);
                         
+                        setTextForAll('UQ_HoTen', toTitleCase(data.UQ_HoTen));
+                        setTextForAll('UQ_CCCD', data.UQ_CCCD);
+                        setTextForAll('UQ_SoDienThoai', data.UQ_SoDienThoai ? (String(data.UQ_SoDienThoai).startsWith('0') ? data.UQ_SoDienThoai : '0' + data.UQ_SoDienThoai) : '...');
+                        setTextForAll('UQ_DiaChi', data.UQ_DiaChi);
+                        setTextForAll('UQ_SoTaiKhoan', data.UQ_SoTaiKhoan);
+                        setTextForAll('UQ_NganHang', data.UQ_NganHang);
+
                         let thoiHan = data.ThoiHanNam;
                         if(thoiHan && thoiHan.toString().includes('(')) {
                             thoiHan = thoiHan.toString().split('(')[0].trim();
@@ -638,6 +645,12 @@
                             const dateCap = new Date(data.CCCD_NgayCap);
                             if (!isNaN(dateCap.getTime())) {
                                 setTextForAll('Ben_A_Ngay_Cap', dateCap.toLocaleDateString('vi-VN'));
+                            }
+                        }
+                        if (data.UQ_CCCD_NgayCap) {
+                            const dateUQCap = new Date(data.UQ_CCCD_NgayCap);
+                            if (!isNaN(dateUQCap.getTime())) {
+                                setTextForAll('UQ_CCCD_NgayCap', dateUQCap.toLocaleDateString('vi-VN'));
                             }
                         }
                         
