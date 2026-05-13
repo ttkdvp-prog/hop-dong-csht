@@ -96,7 +96,7 @@
         <p>Hôm nay, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>, tại <span class="data-field Ben_A_Dia_Chi">...</span>, chúng tôi gồm:</p>
         
         <p class="bold">BÊN CHO THUÊ ĐẤT (dưới đây gọi tắt là bên A)</p>
-        <p>- <span style="text-transform: capitalize;" class="data-field Ben_A_Danh_Xung">Ông/bà</span>: <span class="data-field bold Ben_A_Ho_Ten">...</span> – Đại diện gia đình</p>
+        <p>- <span style="text-transform: capitalize;" class="data-field Ben_A_Danh_Xung">Ông/bà</span>: <span class="data-field Ben_A_Ho_Ten">...</span> – Đại diện gia đình</p>
         <p>- Số điện thoại: <span class="data-field Ben_A_SDT">...</span></p>
         <p>- CCCD số: <span class="data-field Ben_A_CCCD">...</span> - cấp ngày: <span class="data-field Ben_A_Ngay_Cap">...</span></p>
         <p>- Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
@@ -201,7 +201,7 @@
             <p>Hôm nay, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>, tại <span class="data-field Ben_A_Dia_Chi">...</span>, chúng tôi gồm:</p>
             
             <p class="bold">BÊN A: (BÊN CHO THUÊ)</p>
-            <p>- Người đại diện: <span style="text-transform: capitalize;" class="data-field Ben_A_Danh_Xung">Ông/bà</span> <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+            <p>- Người đại diện: <span style="text-transform: capitalize;" class="data-field Ben_A_Danh_Xung">Ông/bà</span> <span class="data-field Ben_A_Ho_Ten">...</span></p>
             <p>- Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
             <p>- Số CCCD: <span class="data-field Ben_A_CCCD">...</span> cấp ngày <span class="data-field Ben_A_Ngay_Cap">...</span> - Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
             <p>- Điện thoại: <span class="data-field Ben_A_SDT">...</span></p>
@@ -247,7 +247,7 @@
         <div class="center title">GIẤY ĐỀ NGHỊ THANH TOÁN</div>
         
         <p class="bold italic">Kính gửi: Viễn thông Phú Thọ</p>
-        <p>Tên tôi là: <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+        <p>Tên tôi là: <span class="data-field Ben_A_Ho_Ten">...</span></p>
         <p>Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
         <p>Số CMND/CCCD: <span class="data-field Ben_A_CCCD">...</span> – cấp ngày: <span class="data-field Ben_A_Ngay_Cap">...</span></p>
         <p>Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
@@ -354,7 +354,7 @@
         </div>
         <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
         <div class="center title">GIẤY ỦY QUYỀN</div>
-        <p>Tôi tên là: <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+        <p>Tôi tên là: <span class="data-field Ben_A_Ho_Ten">...</span></p>
         <p>Số CCCD: <span class="data-field Ben_A_CCCD">...</span> - cấp ngày <span class="data-field Ben_A_Ngay_Cap">...</span></p>
         <p>Nơi cấp: <span class="data-field Ben_A_Noi_Cap">...</span></p>
         <p>Địa chỉ: <span class="data-field Ben_A_Dia_Chi">...</span></p>
@@ -490,7 +490,7 @@
                         
                         const toTitleCase = (str) => {
                             if (!str) return '...';
-                            return String(str).toLowerCase();
+                            return String(str).toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                         };
                         
                         // Hàm helper để gán dữ liệu vào tất cả các thẻ có class tương ứng
