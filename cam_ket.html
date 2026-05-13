@@ -263,9 +263,10 @@
                         };
 
                         let danhXung = 'ông/bà';
-                        if (data.GioiTinh) {
-                            if (String(data.GioiTinh).toLowerCase() === 'nam') danhXung = 'ông';
-                            else if (String(data.GioiTinh).toLowerCase() === 'nữ' || String(data.GioiTinh).toLowerCase() === 'nu') danhXung = 'bà';
+                        let gt = data.Gioitinh || data.GioiTinh;
+                        if (gt) {
+                            if (String(gt).toLowerCase() === 'nam') danhXung = 'ông';
+                            else if (String(gt).toLowerCase() === 'nữ' || String(gt).toLowerCase() === 'nu') danhXung = 'bà';
                         }
                         setTextForAll('Ben_A_Danh_Xung', danhXung);
 
