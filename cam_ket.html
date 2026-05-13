@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Bản Cam Kết</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        @page {
+            size: A4;
+            margin-top: 15mm;
+            margin-bottom: 15mm;
+            margin-left: 20mm;
+            margin-right: 20mm;
+        }
+        body { 
+            font-family: 'Times New Roman', serif; 
+            line-height: 1.3; 
+            font-size: 13pt; 
+            margin: 0; 
+            padding: 0; 
+            color: #000;
+        }
+        
+        .center { text-align: center; }
+        .bold { font-weight: bold !important; }
+        .italic { font-style: italic; }
+        .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+        .signature-box { display: flex; justify-content: space-between; margin-top: 20px; page-break-inside: avoid; }
+        .signature-col { width: 45%; text-align: center; }
+        .signature-space { height: 100px; }
+        p { margin: 5px 0; text-align: justify; }
+        ul, ol { margin-top: 5px; margin-bottom: 5px; }
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .table-custom th, .table-custom td { border: 1px solid black; padding: 8px; text-align: left; }
+        @media print {
+            #loading { display: none !important; }
+            #action-buttons { display: none !important; }
+        }
+        #loading { text-align: center; font-size: 20px; color: #666; margin-top: 50px; }
+        #content { display: none; }
+        .data-field { font-weight: normal; }
+    
+        .print-page {
+            width: 645px;
+            margin: 0 auto;
+            background: white;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .print-page + .print-page {
+            page-break-before: always;
+        }
+        p, tr, td, li, .bold, .center, .signature-box, table {
+            page-break-inside: avoid;
+        }
+        @media print {
+            .print-page {
+                width: 100%;
+                page-break-after: always;
+            }
+            .print-page:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Đang tải dữ liệu bản cam kết...</div>
+    <div id="action-buttons" style="text-align: center; margin-bottom: 20px; display: none; padding-top: 20px;">
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-weight: bold;">🖨️ In Giấy Cam Kết</button>
+        <button onclick="exportHTMLToPDF()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; font-weight: bold;">📄 Tải file PDF</button>
+        <button onclick="exportHTMLToDoc()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #2196F3; color: white; border: none; border-radius: 4px; font-weight: bold;">💾 Tải file Word (.doc)</button>
+    </div>
+    <div id="content">
+        <div class="print-page">
+            <div class="center bold">
+                CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+                Độc lập - Tự do - Hạnh phúc<br>
+                --------------------
+            </div>
+            <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+            
+            <div class="center title" style="margin-top: 15px;">BẢN CAM KẾT</div>
+            <div class="center bold italic" style="margin-bottom: 20px;">Về nguồn gốc, quá trình sử dụng mặt bằng phục vụ trạm viễn thông</div>
+            
+            <p class="bold italic">Kính gửi: Viễn thông Phú Thọ</p>
+            <p>Tôi tên là: <span class="data-field bold Ben_A_Ho_Ten">...</span></p>
+            <p>Sinh ngày: <span class="data-field Ben_A_Ngay_Sinh">...</span></p>
+            <p>Số CCCD/căn cước: <span class="data-field Ben_A_CCCD">...</span> cấp ngày <span class="data-field Ben_A_Ngay_Cap">...</span> tại <span class="data-field Ben_A_Noi_Cap">...</span></p>
+            <p>Địa chỉ thường trú: <span class="data-field Ben_A_Dia_Chi">...</span></p>
+            <p>Số điện thoại liên hệ: <span class="data-field Ben_A_SDT">...</span></p>
+            <p>Hiện nay, tôi là người đang trực tiếp quản lý, sử dụng phần mặt bằng tại: <span class="data-field Dia_Chi_Tram">...</span></p>
+            <p>Phần mặt bằng nêu trên hiện đang được cho Viễn thông Phú Thọ thuê để lắp đặt, duy trì trạm viễn thông mã trạm/tên trạm: <span class="data-field Ma_Tram">...</span> / <span class="data-field Vi_Tri_Thue">...</span> theo hồ sơ/hợp đồng đã thực hiện từ giai đoạn trước.</p>
+            
+            <p>Tôi xin cam kết với Viễn thông Phú Thọ các nội dung sau:</p>
+            <p>1/ Chịu trách nhiệm về nguồn gốc, quá trình quản lý, sử dụng phần mặt bằng đang cho Viễn thông Phú Thọ sử dụng để lắp đặt, duy trì trạm viễn thông. Tôi cam kết tại thời điểm hiện tại phần mặt bằng nêu trên do tôi quản lý, sử dụng ổn định; chưa phát sinh tranh chấp, khiếu kiện; Trường hợp sau này phát sinh tranh chấp, khiếu kiện đối với phần mặt bằng nêu trên, làm ảnh hưởng đến việc duy trì, vận hành trạm viễn thông hoặc làm phát sinh thiệt hại, chi phí cho Viễn thông Phú Thọ, tôi cam kết phối hợp giải quyết với các bên liên quan và cơ quan có thẩm quyền; đồng thời hoàn trả các khoản tiền đã nhận không có căn cứ và bồi hoàn thiệt hại, chi phí phát sinh cho Viễn thông Phú Thọ theo quy định.</p>
+            <p>2/ Tạo điều kiện cho Viễn thông Phú Thọ và các đơn vị liên quan ra, vào vị trí trạm để vận hành, kiểm tra, bảo dưỡng, sửa chữa, xử lý sự cố, ứng cứu thông tin theo yêu cầu của Viễn thông Phú Thọ. Trường hợp phải điều chỉnh, di dời trạm theo yêu cầu của cơ quan Nhà nước hoặc theo nhu cầu của Viễn thông Phú Thọ tôi cam kết phối hợp, tạo điều kiện để Viễn thông Phú Thọ kiểm tra, tháo dỡ, di chuyển, thu hồi thiết bị theo kế hoạch của đơn vị.</p>
+            <p>Tôi cam kết thực hiện đúng các điều khoản trong hợp đồng cho thuê mặt bằng đã ký với Viễn thông Phú Thọ và không có yêu cầu nào khác liên quan đến việc Viễn thông Phú Thọ sử dụng phần mặt bằng nêu trên.</p>
+            <p>Tôi đã đọc, hiểu rõ toàn bộ nội dung cam kết này và tự nguyện ký tên dưới đây. Mọi thông tin tôi cung cấp là đúng sự thật; nếu sai, tôi xin hoàn toàn chịu trách nhiệm trước pháp luật và trước Viễn thông Phú Thọ.</p>
+            
+            <div class="signature-box">
+                <div class="signature-col"></div>
+                <div class="signature-col">
+                    <span class="bold">NGƯỜI CAM KẾT</span><br>
+                    (Ký, ghi rõ họ tên)<br>
+                    <div class="signature-space"></div>
+                    <span class="data-field bold Ben_A_Ho_Ten">...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // BƯỚC 1: ĐIỀN ĐƯỜNG DẪN WEB APP GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
+        const API_URL = "https://script.google.com/macros/s/AKfycbz5zkbEhwo0SyltYy77nPN91HAMEoFhNy5V3GSaveX2iaLM5RevCvuOfzBupiTnSFtn/exec";
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const idHopDong = urlParams.get('id');
+
+        if (!idHopDong) {
+            document.getElementById('loading').innerHTML = "Lỗi: Không tìm thấy ID Hợp đồng trong đường dẫn (URL).";
+        } else {
+            fetch(`${API_URL}?id=${idHopDong}`)
+                .then(response => response.json())
+                .then(res => {
+                    if (res.success) {
+                        const data = res.data;
+                        
+                        // Hàm helper để gán dữ liệu vào tất cả các thẻ có class tương ứng
+                        const setTextForAll = (className, text) => {
+                            const els = document.querySelectorAll('.' + className);
+                            els.forEach(el => {
+                                el.innerText = text || '...';
+                            });
+                        };
+
+                        setTextForAll('So_Hop_Dong', data.SoHopDong);
+                        setTextForAll('Ben_A_Ho_Ten', data.HoTen);
+                        setTextForAll('Ben_A_CCCD', data.CCCD);
+                        setTextForAll('Ben_A_Noi_Cap', 'Cục cảnh sát QLHC về TTXH'); // Dữ liệu API không có Nơi Cấp
+                        setTextForAll('Ben_A_Dia_Chi', data.DiaChiThuongTru);
+                        setTextForAll('Ben_A_SDT', '0' + data.SoDienThoai);
+                        setTextForAll('Ben_A_STK', data.SoTaiKhoan);
+                        setTextForAll('Ben_A_Ngan_Hang', data.NganHang);
+                        setTextForAll('Vi_Tri_Thue', data.TenTram);
+                        setTextForAll('Ma_Tram', data.MaTram || idHopDong);
+                        setTextForAll('Dien_Tich_Thue', data.DienTichThue_m2);
+                        setTextForAll('Dia_Chi_Tram', data.DiaChiTram);
+                        
+                        let thoiHan = data.ThoiHanNam;
+                        if(thoiHan && thoiHan.toString().includes('(')) {
+                            thoiHan = thoiHan.toString().split('(')[0].trim();
+                        }
+                        setTextForAll('Thoi_Han_Thue', thoiHan);
+                        
+                        const docTienBangChu = (function() {
+                            var mangso = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+                            function dochangchuc(so, daydu) {
+                                var chuoi = "";
+                                var chuc = Math.floor(so / 10);
+                                var donvi = so % 10;
+                                if (chuc > 1) {
+                                    chuoi = " " + mangso[chuc] + " mươi";
+                                    if (donvi == 1) { chuoi += " mốt"; }
+                                } else if (chuc == 1) {
+                                    chuoi = " mười";
+                                    if (donvi == 1) { chuoi += " một"; }
+                                } else if (daydu && donvi > 0) {
+                                    chuoi = " lẻ";
+                                }
+                                if (donvi == 5 && chuc >= 1) {
+                                    chuoi += " lăm";
+                                } else if (donvi == 4 && chuc >= 1) {
+                                    chuoi += " tư";
+                                } else if (donvi > 0 && (donvi != 1 || chuc == 0)) {
+                                    chuoi += " " + mangso[donvi];
+                                }
+                                return chuoi;
+                            }
+                            function docblock(so, daydu) {
+                                var chuoi = "";
+                                var tram = Math.floor(so / 100);
+                                so = so % 100;
+                                if (daydu || tram > 0) {
+                                    chuoi = " " + mangso[tram] + " trăm";
+                                    chuoi += dochangchuc(so, true);
+                                } else {
+                                    chuoi = dochangchuc(so, false);
+                                }
+                                return chuoi;
+                            }
+                            function dochangtrieu(so, daydu) {
+                                var chuoi = "";
+                                var trieu = Math.floor(so / 1000000);
+                                so = so % 1000000;
+                                if (trieu > 0) {
+                                    chuoi = docblock(trieu, daydu) + " triệu";
+                                    daydu = true;
+                                }
+                                var nghin = Math.floor(so / 1000);
+                                so = so % 1000;
+                                if (nghin > 0) {
+                                    chuoi += docblock(nghin, daydu) + " nghìn";
+                                    daydu = true;
+                                }
+                                if (so > 0) {
+                                    chuoi += docblock(so, daydu);
+                                }
+                                return chuoi;
+                            }
+                            return function(so) {
+                                if (so == 0) return mangso[0] + " đồng chẵn";
+                                var chuoi = "", hauto = "";
+                                do {
+                                    var ty = so % 1000000000;
+                                    so = Math.floor(so / 1000000000);
+                                    if (so > 0) {
+                                        chuoi = dochangtrieu(ty, true) + hauto + chuoi;
+                                    } else {
+                                        chuoi = dochangtrieu(ty, false) + hauto + chuoi;
+                                    }
+                                    hauto = " tỷ";
+                                } while (so > 0);
+                                
+                                let result = chuoi.trim();
+                                if (result.length > 0) {
+                                    result = result.charAt(0).toUpperCase() + result.slice(1);
+                                }
+                                return result + " đồng chẵn";
+                                }
+                        })();
+
+                        // Định dạng tiền tệ
+                        if (data.GiaThueThang) {
+                            const giaThang = Number(data.GiaThueThang);
+                            setTextForAll('Gia_Thue_Thang', giaThang.toLocaleString('vi-VN'));
+                            setTextForAll('Gia_Thue_Chu', docTienBangChu(giaThang));
+                        }
+                        
+                        if (data.SotienThanhToan) {
+                            const soTien = Number(data.SotienThanhToan);
+                            setTextForAll('So_Tien_Thanh_Toan', soTien.toLocaleString('vi-VN'));
+                            setTextForAll('So_Tien_Chu', docTienBangChu(soTien));
+                        } else if (data.GiaThueThang) {
+                            const giaThang = Number(data.GiaThueThang);
+                            const tongTien = giaThang * 12;
+                            setTextForAll('So_Tien_Thanh_Toan', tongTien.toLocaleString('vi-VN'));
+                            setTextForAll('So_Tien_Chu', docTienBangChu(tongTien));
+                        }
+
+                        // Xử lý ngày tháng
+                        if (data.NgayKyHD) {
+                            const date = new Date(data.NgayKyHD);
+                            if (!isNaN(date.getTime())) {
+                                setTextForAll('Ngay_Ky_Day', date.getDate().toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Ky_Month', (date.getMonth() + 1).toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Ky_Year', date.getFullYear());
+                            }
+                        }
+                        if (data.CCCD_NgayCap) {
+                            const dateCap = new Date(data.CCCD_NgayCap);
+                            if (!isNaN(dateCap.getTime())) {
+                                setTextForAll('Ben_A_Ngay_Cap', dateCap.toLocaleDateString('vi-VN'));
+                            }
+                        }
+                        if (data.NgaySinh) {
+                            const dateSinh = new Date(data.NgaySinh);
+                            if (!isNaN(dateSinh.getTime())) {
+                                setTextForAll('Ben_A_Ngay_Sinh', dateSinh.toLocaleDateString('vi-VN'));
+                            }
+                        }
+                        
+                        // Tự động điền số CCCD vào các ô Mã số thuế
+                        if (data.CCCD) {
+                            const cccdStr = String(data.CCCD).trim();
+                            const mstBoxes = document.querySelectorAll('.mst-char');
+                            for (let i = 0; i < cccdStr.length && i < mstBoxes.length; i++) {
+                                mstBoxes[i].innerText = cccdStr[i];
+                            }
+                        }
+
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('action-buttons').style.display = 'block';
+                        document.getElementById('content').style.display = 'block';
+                        
+                        // Tự động bật hộp thoại in
+                        setTimeout(() => {
+                            window.print();
+                        }, 500);
+
+                    } else {
+                        document.getElementById('loading').innerHTML = "Lỗi: Không tìm thấy hợp đồng " + idHopDong;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loading').innerHTML = "Lỗi kết nối máy chủ: " + error.message;
+                });
+        }
+
+        function exportHTMLToDoc() {
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->";
+            var style = "<style>@page Section1 { size: 210mm 297mm; margin: 15mm 20mm 15mm 20mm; mso-page-orientation: portrait; mso-header-margin: 35.4pt; mso-footer-margin: 35.4pt; mso-paper-source: 0; } div.Section1 { page: Section1; } body { font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.3; } p { margin: 5px 0; text-align: justify; } .center { text-align: center; } .bold { font-weight: bold; } .italic { font-style: italic; } .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; } table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid black; padding: 5px; } .table-custom td, .table-custom th { border: 1px solid black; } .signature-space { height: 100px; }</style>";
+            var contentClone = document.getElementById('content').cloneNode(true);
+            
+            // Inject inline styles for MS Word compatibility
+            contentClone.querySelectorAll('.bold').forEach(el => el.style.fontWeight = 'bold');
+            contentClone.querySelectorAll('.italic').forEach(el => el.style.fontStyle = 'italic');
+            contentClone.querySelectorAll('.center').forEach(el => el.style.textAlign = 'center');
+            contentClone.querySelectorAll('.title').forEach(el => {
+                el.style.fontWeight = 'bold';
+                el.style.fontSize = '16pt';
+                el.style.textAlign = 'center';
+            });
+            
+            contentClone.querySelectorAll('.signature-space').forEach(el => {
+                el.innerHTML = '<br><br><br><br><br>';
+            });
+            
+            var sigBoxes = contentClone.querySelectorAll('.signature-box');
+            sigBoxes.forEach(box => {
+                var cols = box.querySelectorAll('.signature-col');
+                var table = document.createElement('table');
+                table.style.width = '100%';
+                table.style.border = 'none';
+                var tr = document.createElement('tr');
+                cols.forEach(col => {
+                    var td = document.createElement('td');
+                    td.style.width = (100 / cols.length) + '%';
+                    td.style.textAlign = 'center';
+                    td.style.verticalAlign = 'top';
+                    td.style.border = 'none';
+                    td.innerHTML = col.innerHTML;
+                    tr.appendChild(td);
+                });
+                table.appendChild(tr);
+                box.parentNode.replaceChild(table, box);
+            });
+
+            // Xử lý ngắt trang cho MS Word
+            var printPages = contentClone.querySelectorAll('.print-page');
+            printPages.forEach((pp, index) => {
+                if (index > 0) {
+                    var pbDiv = document.createElement('div');
+                    pbDiv.innerHTML = '<br clear="all" style="mso-special-character:line-break;page-break-before:always">';
+                    pp.parentNode.insertBefore(pbDiv, pp);
+                }
+                while (pp.firstChild) {
+                    pp.parentNode.insertBefore(pp.firstChild, pp);
+                }
+                pp.parentNode.removeChild(pp);
+            });
+            
+            var html = header + style + "</head><body><div class='Section1'>" + contentClone.innerHTML + "</div></body></html>";
+            
+            var blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+            var filename = 'Giay_Cam_Ket.doc';
+            var downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+            
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = filename;
+                downloadLink.click();
+            }
+            document.body.removeChild(downloadLink);
+        }
+
+        function exportHTMLToPDF() {
+            var filename = 'Giay_Cam_Ket.pdf';
+            
+            document.getElementById('action-buttons').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
+            
+            var printPages = document.querySelectorAll('#content .print-page');
+            
+            // Lưu style gốc
+            var origStyles = [];
+            printPages.forEach(function(pp) {
+                origStyles.push(pp.style.cssText);
+                pp.style.margin = '0';
+            });
+            
+            // Render từng trang riêng biệt bằng html2canvas
+            var promises = [];
+            printPages.forEach(function(pp) {
+                promises.push(html2canvas(pp, { scale: 2, useCORS: true }));
+            });
+            
+            Promise.all(promises).then(function(canvases) {
+                var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+                var marginTop = 15, marginLeft = 20;
+                var innerWidth = 170; // 210 - 20 - 20
+                var innerHeight = 267; // 297 - 15 - 15
+                var isFirstPage = true;
+                
+                canvases.forEach(function(canvas) {
+                    var imgWidthMm = innerWidth;
+                    var imgHeightMm = canvas.height * innerWidth / canvas.width;
+                    
+                    if (imgHeightMm <= innerHeight) {
+                        if (!isFirstPage) pdf.addPage();
+                        isFirstPage = false;
+                        var imgData = canvas.toDataURL('image/jpeg', 0.98);
+                        pdf.addImage(imgData, 'JPEG', marginLeft, marginTop, imgWidthMm, imgHeightMm);
+                    } else {
+                        var pxPerMm = canvas.width / innerWidth;
+                        var pageHeightPx = Math.floor(innerHeight * pxPerMm);
+                        var totalPages = Math.ceil(canvas.height / pageHeightPx);
+                        
+                        for (var p = 0; p < totalPages; p++) {
+                            if (!isFirstPage) pdf.addPage();
+                            isFirstPage = false;
+                            
+                            var srcY = p * pageHeightPx;
+                            var srcH = Math.min(pageHeightPx, canvas.height - srcY);
+                            
+                            var pageCanvas = document.createElement('canvas');
+                            pageCanvas.width = canvas.width;
+                            pageCanvas.height = srcH;
+                            var ctx = pageCanvas.getContext('2d');
+                            ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+                            
+                            var pageImgData = pageCanvas.toDataURL('image/jpeg', 0.98);
+                            var pageImgHeightMm = srcH * innerWidth / canvas.width;
+                            pdf.addImage(pageImgData, 'JPEG', marginLeft, marginTop, imgWidthMm, pageImgHeightMm);
+                        }
+                    }
+                });
+                
+                pdf.save(filename);
+                
+                // Khôi phục style gốc
+                printPages.forEach(function(pp, i) {
+                    pp.style.cssText = origStyles[i] || '';
+                });
+                document.getElementById('action-buttons').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+            }).catch(function(err) {
+                printPages.forEach(function(pp, i) {
+                    pp.style.cssText = origStyles[i] || '';
+                });
+                console.error(err);
+                document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
+                document.getElementById('action-buttons').style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
