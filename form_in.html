@@ -405,7 +405,7 @@
         <div class="center title">GIẤY ĐỀ NGHỊ THANH TOÁN</div>
         
         <p class="bold italic">Kính gửi: Lãnh đạo Viễn thông Phú Thọ</p>
-        <p>Tên tôi là: Nguyễn Thu Trang</p>
+        <p>Tên tôi là: <span class="data-field Nhan_Vien_Cap_Nhat">...</span></p>
         <p>Bộ phận: Tổ tổng hợp - Đơn vị: Trung tâm hạ tầng</p>
         <p>Nội dung thanh toán:</p>
         <table class="table-custom">
@@ -430,9 +430,9 @@
         
         <p>Số tiền bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span></p>
         <p>Hình thức thanh toán: chuyển khoản</p>
-        <p>Đơn vị/người thụ hưởng: <span class="data-field UQ_HoTen">...</span></p>
-        <p>Tài khoản thụ hưởng: <span class="data-field UQ_SoTaiKhoan">...</span></p>
-        <p>Ngân hàng thụ hưởng: <span class="data-field UQ_NganHang">...</span></p>
+        <p>Đơn vị/người thụ hưởng: <span class="data-field Thu_Huong_Ho_Ten">...</span></p>
+        <p>Tài khoản thụ hưởng: <span class="data-field Thu_Huong_STK">...</span></p>
+        <p>Ngân hàng thụ hưởng: <span class="data-field Thu_Huong_Ngan_Hang">...</span></p>
         
         <table style="width: 100%; text-align: center; margin-top: 10px; border-collapse: collapse;">
             <tr>
@@ -446,7 +446,7 @@
                 <td style="border: none;"></td>
             </tr>
             <tr>
-                <td style="border: none;" class="bold">Nguyễn Thu Trang</td>
+                <td style="border: none;" class="data-field bold Nhan_Vien_Cap_Nhat">...</td>
                 <td style="border: none;" class="bold">Nguyễn Thị Phương Anh</td>
                 <td style="border: none;" class="bold">Nguyễn Công Hoan</td>
             </tr>
@@ -530,6 +530,27 @@
                         setTextForAll('UQ_DiaChi', data.UQ_DiaChi);
                         setTextForAll('UQ_SoTaiKhoan', data.UQ_SoTaiKhoan);
                         setTextForAll('UQ_NganHang', data.UQ_NganHang);
+                        
+                        let nhanVienCapNhat = data.NhanVienCapNhat || data.NguoiCapNhat || data.Nhan_Vien_Cap_Nhat || '........................';
+                        setTextForAll('Nhan_Vien_Cap_Nhat', toTitleCase(nhanVienCapNhat));
+
+                        let isUyQuyen = data.CoUyQuyenNhanTien || false;
+                        if (String(data.CoUyQuyenNhanTien).toLowerCase() === 'true') {
+                            isUyQuyen = true;
+                        }
+                        if (data.UQ_HoTen && String(data.UQ_HoTen).trim() !== '') {
+                            isUyQuyen = true;
+                        }
+
+                        if (isUyQuyen) {
+                            setTextForAll('Thu_Huong_Ho_Ten', toTitleCase(data.UQ_HoTen || '................'));
+                            setTextForAll('Thu_Huong_STK', data.UQ_SoTaiKhoan || '................');
+                            setTextForAll('Thu_Huong_Ngan_Hang', data.UQ_NganHang || '................');
+                        } else {
+                            setTextForAll('Thu_Huong_Ho_Ten', toTitleCase(data.HoTen || '................'));
+                            setTextForAll('Thu_Huong_STK', data.SoTaiKhoan || '................');
+                            setTextForAll('Thu_Huong_Ngan_Hang', data.NganHang || '................');
+                        }
 
                         let thoiHan = data.ThoiHanNam;
                         if(thoiHan && thoiHan.toString().includes('(')) {
