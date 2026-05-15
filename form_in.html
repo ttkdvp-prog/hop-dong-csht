@@ -531,7 +531,17 @@
                         setTextForAll('UQ_SoTaiKhoan', data.UQ_SoTaiKhoan);
                         setTextForAll('UQ_NganHang', data.UQ_NganHang);
                         
-                        let nhanVienCapNhat = data.NhanVienCapNhat || data.NguoiCapNhat || data.Nhan_Vien_Cap_Nhat || '........................';
+                        let nhanVien = data.NhanVienCapNhat || data.NguoiCapNhat || data.Nhan_Vien_Cap_Nhat;
+                        if (!nhanVien || String(nhanVien).trim() === '') {
+                            for (let key in data) {
+                                let normalizedKey = key.toLowerCase().replace(/\s/g, '');
+                                if (normalizedKey === 'nguoicapnhat' || normalizedKey === 'nhanviencapnhat') {
+                                    nhanVien = data[key];
+                                    break;
+                                }
+                            }
+                        }
+                        let nhanVienCapNhat = (nhanVien && String(nhanVien).trim() !== '') ? nhanVien : '........................';
                         setTextForAll('Nhan_Vien_Cap_Nhat', toTitleCase(nhanVienCapNhat));
 
                         let isUyQuyen = data.CoUyQuyenNhanTien || false;
