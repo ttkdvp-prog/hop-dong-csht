@@ -29,7 +29,7 @@
         .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
         .signature-box { display: flex; justify-content: space-between; margin-top: 20px; page-break-inside: avoid; }
         .signature-col { width: 45%; text-align: center; }
-        .signature-space { height: 60px; }
+        .signature-space { height: 90px; }
         p { margin: 3px 0; text-align: justify; }
         ul, ol { margin-top: 5px; margin-bottom: 5px; }
         .table-custom { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -684,7 +684,7 @@
 
         function exportHTMLToDoc() {
             var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->";
-            var style = "<style>@page Section1 { size: 210mm 297mm; margin: 15mm 20mm 15mm 20mm; mso-page-orientation: portrait; mso-header-margin: 35.4pt; mso-footer-margin: 35.4pt; mso-paper-source: 0; } div.Section1 { page: Section1; } body { font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.3; } p { margin: 3px 0; text-align: justify; } .center { text-align: center; } .bold { font-weight: bold; } .italic { font-style: italic; } .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; } table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid black; padding: 5px; } .table-custom td, .table-custom th { border: 1px solid black; } .signature-space { height: 60px; }</style>";
+            var style = "<style>@page Section1 { size: 210mm 297mm; margin: 15mm 20mm 15mm 20mm; mso-page-orientation: portrait; mso-header-margin: 35.4pt; mso-footer-margin: 35.4pt; mso-paper-source: 0; } div.Section1 { page: Section1; } body { font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.3; } p { margin: 3px 0; text-align: justify; } .center { text-align: center; } .bold { font-weight: bold; } .italic { font-style: italic; } .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; } table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid black; padding: 5px; } .table-custom td, .table-custom th { border: 1px solid black; } .signature-space { height: 90px; }</style>";
             var contentClone = document.getElementById('content').cloneNode(true);
             
             // Inject inline styles for MS Word compatibility
@@ -698,7 +698,7 @@
             });
             
             contentClone.querySelectorAll('.signature-space').forEach(el => {
-                el.innerHTML = '<br><br><br><br><br>';
+                el.innerHTML = '<br><br><br><br><br><br><br>';
             });
             
             var sigBoxes = contentClone.querySelectorAll('.signature-box');
