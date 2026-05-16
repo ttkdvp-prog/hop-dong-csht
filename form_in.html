@@ -258,7 +258,7 @@
         <p>Đề nghị thanh toán số tiền: <span class="data-field So_Tien_Thanh_Toan">...</span> VNĐ</p>
         <p>(Viết bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span>)</p>
         
-        <p>Lý do thanh toán: Thanh toán tiền thuê đất đặt trạm <span class="data-field Vi_Tri_Thue">...</span> theo hợp đồng số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></p>
+        <p>Lý do thanh toán: Thanh toán tiền thuê đất đặt trạm <span class="data-field Vi_Tri_Thue">...</span><span class="data-field Ky_Thanh_Toan"></span> theo hợp đồng số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></p>
         
         <p>Số tiền trên được chuyển khoản như sau:</p>
         <p>- Người thụ hưởng: <span class="data-field Ben_A_Ho_Ten">...</span></p>
@@ -417,7 +417,7 @@
             </tr>
             <tr>
                 <td class="center">1</td>
-                <td>Thanh toán tiền thuê đất XD trạm BTS: Trạm <span class="data-field Vi_Tri_Thue">...</span> theo HĐ số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></td>
+                <td>Thanh toán tiền thuê đất XD trạm BTS<span class="data-field Ky_Thanh_Toan"></span>: Trạm <span class="data-field Vi_Tri_Thue">...</span> theo HĐ số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐTĐ ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></td>
                 <td class="center"><span class="data-field So_Tien_Thanh_Toan">...</span></td>
                 <td></td>
             </tr>
@@ -522,6 +522,11 @@
                         setTextForAll('Ben_A_Ngan_Hang', data.NganHang);
                         setTextForAll('Vi_Tri_Thue', data.TenTram);
                         setTextForAll('Ma_Tram', data.MaTram || idHopDong);
+                        
+                        const elsKyThanhToan = document.querySelectorAll('.Ky_Thanh_Toan');
+                        elsKyThanhToan.forEach(el => {
+                            el.innerText = data.KyThanhToan ? ' ' + data.KyThanhToan : '';
+                        });
                         setTextForAll('Dien_Tich_Thue', data.DienTichThue_m2);
                         
                         setTextForAll('UQ_HoTen', toTitleCase(data.UQ_HoTen));
