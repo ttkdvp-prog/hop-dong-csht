@@ -729,8 +729,8 @@
                                 const parts = displayDate.split('-');
                                 displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
                             }
-                            // Nếu đã là chuỗi kiểu 10/05/1988 thì giữ nguyên để không bị lộn ngày tháng
-                            setTextForAll('UQ_NgaySinh', displayDate);
+                            // Debugging output to see exactly what API returns
+                            setTextForAll('UQ_NgaySinh', `RAW: ${uqNgaySinhData} | OUT: ${displayDate}`);
                         } else {
                             setTextForAll('UQ_NgaySinh', '........');
                         }
