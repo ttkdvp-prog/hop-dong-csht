@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Hợp Đồng Dịch Vụ Hành Chính Công</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        @page {
+            size: A4;
+            margin-top: 15mm;
+            margin-bottom: 15mm;
+            margin-left: 20mm;
+            margin-right: 20mm;
+        }
+        body { 
+            font-family: 'Times New Roman', serif; 
+            line-height: 1.3; 
+            font-size: 13pt; 
+            margin: 0; 
+            padding: 0; 
+            color: #000;
+        }
+        
+        .center { text-align: center; }
+        .bold { font-weight: bold !important; }
+        .italic { font-style: italic; }
+        .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+        .signature-box { display: flex; justify-content: space-between; margin-top: 20px; page-break-inside: avoid; }
+        .signature-col { width: 45%; text-align: center; }
+        .signature-space { height: 90px; }
+        p { margin: 3px 0; text-align: justify; }
+        ul, ol { margin-top: 5px; margin-bottom: 5px; }
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .table-custom th, .table-custom td { border: 1px solid black; padding: 8px; text-align: left; }
+        @media print {
+            #loading { display: none !important; }
+            #action-buttons { display: none !important; }
+        }
+        #loading { text-align: center; font-size: 20px; color: #666; margin-top: 50px; }
+        #content { display: none; }
+        .data-field { font-weight: normal; }
+    
+        .print-page {
+            width: 645px;
+            margin: 0 auto;
+            background: white;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .print-page + .print-page {
+            page-break-before: always;
+        }
+        p, tr, td, li, .bold, .center, .signature-box, table {
+            page-break-inside: avoid;
+        }
+        @media print {
+            .print-page {
+                width: 100%;
+                page-break-after: always;
+            }
+            .print-page:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Đang tải dữ liệu hợp đồng...</div>
+    <div id="action-buttons" style="text-align: center; margin-bottom: 20px; display: none; padding-top: 20px;">
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-weight: bold;">🖨️ In Hợp Đồng</button>
+        <button onclick="exportHTMLToPDF()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; font-weight: bold;">📄 Tải file PDF</button>
+        <button onclick="exportHTMLToDoc()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #2196F3; color: white; border: none; border-radius: 4px; font-weight: bold;">💾 Tải file Word (.doc)</button>
+    </div>
+    <div id="content">
+
+    <div class="print-page">
+        <!-- ================= TRANG 1: THỎA THUẬN HỢP TÁC ================= -->
+        <div class="center bold">
+            CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+            Độc lập - Tự do - Hạnh phúc<br>
+            --------------------
+        </div>
+        <br>
+        <div class="center title">THỎA THUẬN HỢP TÁC</div>
+        <div class="center bold">(Phục vụ lắp đặt, duy trì và vận hành trạm phát sóng di động)</div>
+        <div class="center italic">(Số: <span class="data-field So_Hop_Dong" style="color: blue;">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/TTHT-TTHT_PTO)</div>
+        
+        <p class="italic">Căn cứ Nghị quyết số 57-NQ/TW của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, trong đó xác định phát triển hạ tầng số là ưu tiên quốc gia, phục vụ lợi ích công cộng;</p>
+        <p class="italic">Căn cứ nhu cầu và khả năng thực tế của các bên;</p>
+        <p>Hôm nay, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>, tại Viễn thông Phú Thọ.</p>
+        <p>Chúng tôi gồm:</p>
+        
+        <p class="bold">BÊN A : <span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></p>
+        <p>- Địa chỉ: <span class="data-field Dia_Chi_Thuong_Tru">...</span></p>
+        <p>- Số tài khoản: <span class="data-field So_Tai_Khoan">...</span></p>
+        <p>- Tại Ngân hàng: <span class="data-field Ngan_Hang">...</span></p>
+        <p>- Ông/Bà: <span class="data-field Ho_Ten bold">...</span></p>
+        <p>- Chức vụ: <span class="data-field Chuc_Vu">...</span></p>
+        
+        <p class="bold">BÊN B : VIỄN THÔNG PHÚ THỌ</p>
+        <p>- Địa chỉ: Số 1468, Đường Hùng Vương, Phường Thanh Miếu, Tỉnh Phú Thọ</p>
+        <p>- Số tài khoản: 110000031172</p>
+        <p>- Ngân hàng: Ngân hàng TMCP Công thương Việt Nam - Chi nhánh Phú Thọ</p>
+        <p>- Mã số thuế: 2600102568</p>
+        <p>- Đại diện là: Ông Lê Văn Đức</p>
+        <p>- Chức vụ: Phó Giám đốc</p>
+        <p class="italic">(Theo giấy ủy quyền ký hợp đồng số 1653/UQ-VTPT ngày 01 tháng 10 năm 2025 của Giám đốc Viễn thông Phú Thọ.)</p>
+        
+        <p>Hai bên thống nhất ký kết Thỏa thuận sử dụng mặt bằng với các nội dung sau:</p>
+        <p class="bold">Điều 1. Mục đích và phạm vi sử dụng mặt bằng</p>
+        <p>Bên A thống nhất tạo điều kiện cho Bên B được sử dụng một phần diện tích đất tại vị trí nằm trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span>, thuộc địa bàn <span class="data-field Dia_Chi_Tram">...</span>, để lắp đặt, duy trì và vận hành trạm viễn thông phục vụ cung cấp dịch vụ viễn thông, công nghệ thông tin; bảo đảm thông tin liên lạc; phát triển hạ tầng số, góp phần thực hiện chủ trương chuyển đổi số quốc gia theo Nghị quyết số 57-NQ/TW của Bộ Chính trị, phục vụ lợi ích công cộng, lợi ích của Nhà nước và Nhân dân trên địa bàn.</p>
+        <p>Việc sử dụng mặt bằng theo Thỏa thuận này được xác định là hoạt động phối hợp thực hiện nhiệm vụ công, không nhằm mục đích kinh doanh, không tạo lợi ích riêng cho tổ chức, cá nhân.</p>
+        <p>Diện tích sử dụng dự kiến: <span class="data-field Dien_Tich_Thue">...</span> m². Vị trí, ranh giới cụ thể được xác định tại Biên bản xác nhận hiện trạng và sơ đồ vị trí kèm theo Thỏa thuận này.</p>
+        <p class="bold">Điều 2. Tình trạng pháp lý mặt bằng</p>
+        <p>Bên A xác nhận khu đất nêu tại Điều 1 thuộc phạm vi đất do Nhà nước quản lý và giao <span class="data-field Ten_Co_Quan_HCC">...</span> quản lý theo quy định của pháp luật; tại thời điểm ký Thỏa thuận này, khu đất không có tranh chấp, không khiếu kiện, phù hợp với quy hoạch, kế hoạch sử dụng đất và định hướng phát triển hạ tầng viễn thông, hạ tầng số tại địa phương (nếu có).</p>
+        <p>Thỏa thuận này được lập trên cơ sở phối hợp thực hiện nhiệm vụ công, không phải là hợp đồng thuê đất, không làm phát sinh, thay đổi hoặc chuyển giao quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất; không mang tính thương mại hóa quyền sử dụng đất.</p>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 2: THỎA THUẬN HỢP TÁC (Tiếp) ================= -->
+        <p class="bold">Điều 3. Thời hạn sử dụng mặt bằng</p>
+        <p>Thời hạn sử dụng mặt bằng theo Thỏa thuận này là <span class="data-field Thoi_Han_Thue">...</span> (<span class="data-field Thoi_Han_Chu">...</span>) năm, kể từ ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span> đến hết ngày <span class="data-field Ngay_Het_Han">...</span>.</p>
+        <p>Thời hạn nêu trên được xác lập trên cơ sở phù hợp với quy hoạch, kế hoạch sử dụng đất, định hướng phát triển hạ tầng viễn thông, hạ tầng số tại địa phương và nhu cầu thực tế về vận hành trạm viễn thông phục vụ lợi ích công cộng.</p>
+        <p>Khi hết thời hạn nêu trên, việc tiếp tục sử dụng mặt bằng (nếu có) được hai bên trao đổi, thống nhất trên cơ sở quy định của pháp luật và chủ trương của cơ quan nhà nước có thẩm quyền tại thời điểm xem xét, được thể hiện bằng văn bản riêng; không làm phát sinh quyền sử dụng đất, không làm thay đổi bản chất Thỏa thuận và không tạo nghĩa vụ pháp lý vượt quá phạm vi đã thống nhất.</p>
+        <p class="bold">Điều 4. Nguyên tắc phối hợp thực hiện</p>
+        <p>Việc sử dụng mặt bằng theo Thỏa thuận này được thực hiện trên cơ sở phối hợp, hỗ trợ lẫn nhau giữa hai bên nhằm triển khai hạ tầng viễn thông, hạ tầng số phục vụ lợi ích công cộng, phù hợp với chủ trương, định hướng của Đảng và Nhà nước về phát triển hạ tầng số và chuyển đổi số quốc gia.</p>
+        <p>Trong quá trình thực hiện Thỏa thuận, hai bên thống nhất không xác lập quan hệ thuê, mượn, bồi hoàn hoặc các nghĩa vụ dân sự khác liên quan đến quyền sử dụng đất, đồng thời thực hiện các nội dung đã thỏa thuận đúng quy định pháp luật.</p>
+        <p class="bold">Điều 5. Quyền và trách nhiệm của Bên A</p>
+        <p>Bên A tạo điều kiện để Bên B sử dụng mặt bằng ổn định theo Thỏa thuận; phối hợp bảo đảm an ninh, trật tự, an toàn khu vực trạm viễn thông.</p>
+        <p>Khi có thay đổi liên quan đến quy hoạch, kế hoạch sử dụng đất hoặc chủ trương của cơ quan nhà nước có thẩm quyền ảnh hưởng đến việc sử dụng mặt bằng, Bên A thông báo kịp thời và phối hợp với Bên B để xử lý theo quy định.</p>
+        <p class="bold">Điều 6. Quyền và trách nhiệm của Bên B</p>
+        <p>Bên B sử dụng mặt bằng đúng mục đích, phạm vi đã thỏa thuận; bảo đảm an toàn công trình, an toàn lao động, phòng cháy chữa cháy và vệ sinh môi trường theo quy định.</p>
+        <p>Bên B chịu trách nhiệm đối với toàn bộ tài sản, thiết bị do mình đầu tư, lắp đặt trên mặt bằng và phối hợp với Bên A trong công tác kiểm tra, giám sát theo quy định pháp luật.</p>
+        <p class="bold">Điều 7. Chấm dứt Thỏa thuận</p>
+        <p>Thỏa thuận chấm dứt khi hết nhu cầu sử dụng; khi có quyết định của cơ quan nhà nước có thẩm quyền về việc thu hồi đất, điều chỉnh quy hoạch hoặc yêu cầu chấm dứt việc sử dụng mặt bằng; hoặc khi hai bên thống nhất chấm dứt bằng văn bản.</p>
+        <p>Bên A phối hợp, hỗ trợ Bên B trong việc tháo dỡ, di chuyển công trình và làm việc với các cơ quan liên quan theo quy định pháp luật.</p>
+        <p class="bold">Điều 8. Điều khoản chung</p>
+        <p>Hai bên cam kết thực hiện đúng các nội dung đã thỏa thuận; mọi vướng mắc phát sinh được trao đổi, thống nhất giải quyết trên tinh thần hợp tác, tuân thủ quy định pháp luật.</p>
+        <p>Thỏa thuận được lập thành 04 bản, mỗi bên giữ 02 bản có giá trị pháp lý như nhau và có hiệu lực kể từ ngày ký.</p>
+        
+        <div class="signature-box">
+            <div class="signature-col">
+                <div class="bold">ĐẠI DIỆN BÊN A</div>
+                <div class="signature-space"></div>
+                <div class="bold"><span class="data-field Ho_Ten">...</span></div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">ĐẠI DIỆN BÊN B</div>
+                <div class="signature-space"></div>
+                <div class="bold">Lê Văn Đức</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 3: CV GIỚI THIỆU CÁ NHÂN ================= -->
+        <table class="table-custom" style="border: none; margin-bottom: 20px;">
+            <tr>
+                <td style="border: none; width: 40%; text-align: center; vertical-align: top;">
+                    <div class="bold"><span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></div>
+                    <div>Số: ......../CV-VP</div>
+                    <div class="italic" style="font-size: 11pt;">V/v: giới thiệu cá nhân để xem xét thuê thực hiện dịch vụ trông nom, bảo vệ Trạm viễn thông</div>
+                </td>
+                <td style="border: none; width: 60%; text-align: center; vertical-align: top;">
+                    <div class="bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="bold">Độc lập - Tự do - Hạnh phúc</div>
+                    <div>------------------</div>
+                    <div class="italic">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="center bold" style="margin: 20px 0;">
+            Kính gửi: Viễn thông Phú Thọ
+        </div>
+        
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> căn cứ tình hình thực tế tại địa phương và trên cơ sở trao đổi về nhu cầu bảo đảm an ninh, an toàn đối với Trạm viễn thông đặt trên địa bàn xã,</p>
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> giới thiệu để Viễn thông Phú Thọ tham khảo, xem xét thông tin về cá nhân cư trú trên địa bàn xã, có điều kiện phù hợp về vị trí sinh sống và thời gian, cụ thể như sau:</p>
+        <p>- Họ và tên: <span class="data-field UQ_HoTen bold">...</span></p>
+        <p>- Năm sinh: <span class="data-field UQ_NamSinh">...</span></p>
+        <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span></p>
+        <p>- Cấp ngày: <span class="data-field UQ_NgayCap">...</span></p>
+        <p>- Địa chỉ cư trú: <span class="data-field UQ_DiaChi">...</span></p>
+        <p>Thông tin giới thiệu nêu trên được cung cấp nhằm phục vụ việc xem xét của Viễn thông Phú Thọ theo thẩm quyền.</p>
+        <p>Việc lựa chọn, ký kết hợp đồng thuê dịch vụ, quản lý, chi trả thù lao và thực hiện các nội dung liên quan đối với cá nhân được giới thiệu do Viễn thông Phú Thọ xem xét, quyết định và thực hiện theo quy định.</p>
+        <p>Văn bản này được ban hành nhằm hỗ trợ việc phối hợp trong công tác bảo đảm an ninh, an toàn Trạm viễn thông trên địa bàn xã.</p>
+        <p>Trân trọng./.</p>
+        
+        <div class="signature-box" style="margin-top: 30px;">
+            <div class="signature-col" style="text-align: left;">
+                <div class="italic bold">Nơi nhận:</div>
+                <div class="italic">- Như kính gửi;</div>
+                <div class="italic">- Lưu VT.</div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">VĂN PHÒNG</div>
+                <div class="bold"><span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></div>
+                <div class="signature-space"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 4: CV ĐỒNG Ý RA VÀO (TỪ HCC) ================= -->
+        <table class="table-custom" style="border: none; margin-bottom: 20px;">
+            <tr>
+                <td style="border: none; width: 40%; text-align: center; vertical-align: top;">
+                    <div class="bold"><span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></div>
+                    <div>Số: ......../CV-VP</div>
+                    <div class="italic" style="font-size: 11pt;">V/v: đồng ý cho cá nhân ra vào trông nom, bảo vệ Trạm viễn thông trên địa bàn xã</div>
+                </td>
+                <td style="border: none; width: 60%; text-align: center; vertical-align: top;">
+                    <div class="bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="bold">Độc lập - Tự do - Hạnh phúc</div>
+                    <div>------------------</div>
+                    <div class="italic">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="center bold" style="margin: 20px 0;">
+            Kính gửi: Viễn thông Phú Thọ
+        </div>
+        
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> thông báo:</p>
+        <p>Căn cứ đề nghị của Viễn thông Phú Thọ về việc bố trí cá nhân thực hiện công tác trông nom, giám sát, bảo vệ Trạm viễn thông đặt trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span>,</p>
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> đồng ý để <span class="data-field UQ_DanhXung">ông/bà</span> <span class="data-field UQ_HoTen bold">...</span>, sinh năm <span class="data-field UQ_NamSinh">...</span>, cư trú tại <span class="data-field UQ_DiaChi">...</span>, được ra vào khu vực Trạm viễn thông của Viễn thông Phú Thọ đặt trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span> nhằm phục vụ công tác trông nom, giám sát, bảo vệ Trạm theo thỏa thuận với Viễn thông Phú Thọ.</p>
+        <p>Việc ra vào khu vực Trạm được thực hiện đúng mục đích nêu trên, phù hợp với yêu cầu quản lý địa bàn và các quy định pháp luật có liên quan.</p>
+        <p>Thông báo này được ban hành để các tổ chức, cá nhân có liên quan biết và phối hợp thực hiện.</p>
+        <p>Trân trọng./.</p>
+        
+        <div class="signature-box" style="margin-top: 30px;">
+            <div class="signature-col" style="text-align: left;">
+                <div class="italic bold">Nơi nhận:</div>
+                <div class="italic">- Như kính gửi;</div>
+                <div class="italic">- Lưu VT.</div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">VĂN PHÒNG</div>
+                <div class="bold"><span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></div>
+                <div class="signature-space"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 5: CV THỐNG NHẤT TỪ VNPT ================= -->
+        <table class="table-custom" style="border: none; margin-bottom: 20px;">
+            <tr>
+                <td style="border: none; width: 40%; text-align: center; vertical-align: top;">
+                    <div class="bold">TẬP ĐOÀN BƯU CHÍNH</div>
+                    <div class="bold">VIỄN THÔNG VIỆT NAM</div>
+                    <div class="bold">VIỄN THÔNG PHÚ THỌ</div>
+                    <div>Số: ......../CV-VNPT-TTHT</div>
+                    <div class="italic" style="font-size: 11pt;">V/v: thống nhất để cá nhân ra vào trông nom, bảo vệ Trạm viễn thông</div>
+                </td>
+                <td style="border: none; width: 60%; text-align: center; vertical-align: top;">
+                    <div class="bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="bold">Độc lập - Tự do - Hạnh phúc</div>
+                    <div>------------------</div>
+                    <div class="italic">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="center bold" style="margin: 20px 0;">
+            Kính gửi: <span class="data-field Ten_Co_Quan_HCC bold">...</span>
+        </div>
+        
+        <p>Viễn thông Phú Thọ nhận được Văn bản số ………/CV-VP ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span> của <span class="data-field Ten_Co_Quan_HCC">...</span> về việc giới thiệu cá nhân để xem xét thuê thực hiện dịch vụ trông nom, bảo vệ Trạm viễn thông.</p>
+        <p>Sau khi xem xét nhu cầu quản lý, vận hành Trạm viễn thông và điều kiện thực tế tại địa bàn, Viễn thông Phú Thọ thống nhất để <span class="data-field UQ_DanhXung">ông/bà</span> <span class="data-field UQ_HoTen bold">...</span>, sinh năm <span class="data-field UQ_NamSinh">...</span>, cư trú tại <span class="data-field UQ_DiaChi">...</span>, được ra vào khu vực Trạm viễn thông của Viễn thông Phú Thọ nằm trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span> nhằm phục vụ công tác trông nom, giám sát, bảo vệ Trạm theo thỏa thuận giữa Viễn thông Phú Thọ và cá nhân.</p>
+        <p>Việc trông nom, giám sát, bảo vệ Trạm do Viễn thông Phú Thọ trực tiếp tổ chức thực hiện; cá nhân nêu trên do Viễn thông Phú Thọ xem xét, lựa chọn, quản lý và chi trả thù lao theo quy định.</p>
+        <p>Viễn thông Phú Thọ đề nghị <span class="data-field Ten_Co_Quan_HCC">...</span> phối hợp, tạo điều kiện trong công tác quản lý địa bàn để cá nhân nêu trên thực hiện việc ra vào Trạm đúng mục đích, bảo đảm an ninh, an toàn và phù hợp với quy định pháp luật.</p>
+        <p>Xin trân trọng cảm ơn./.</p>
+        
+        <div class="signature-box" style="margin-top: 30px;">
+            <div class="signature-col" style="text-align: left;">
+                <div class="italic bold">Nơi nhận:</div>
+                <div class="italic">- Như kính gửi;</div>
+                <div class="italic">- Lưu VT, TTHT.</div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">KT. GIÁM ĐỐC</div>
+                <div class="bold">PHÓ GIÁM ĐỐC</div>
+                <div class="signature-space"></div>
+                <div class="bold">Lê Văn Đức</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 6: HỢP ĐỒNG DỊCH VỤ ================= -->
+        <div class="center bold">
+            CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+            Độc lập - Tự do - Hạnh phúc<br>
+            --------------------
+        </div>
+        <br>
+        <div class="center title">HỢP ĐỒNG DỊCH VỤ</div>
+        <div class="center bold">ĐẢM BẢO AN NINH TRẬT TỰ TRẠM PHÁT SÓNG DI ĐỘNG</div>
+        <div class="center italic">(Số: <span class="data-field So_Hop_Dong" style="color: blue;">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐDV-TTHT_PTO)</div>
+        
+        <p class="italic">Căn cứ Bộ Luật dân sự năm 2015 số 91/2015/QH13 ngày 24/11/2015;</p>
+        <p class="italic">Căn cứ nhu cầu và khả năng thực tế của các bên trong hợp đồng;</p>
+        <p>Hôm nay, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>, tại Viễn thông Phú Thọ.</p>
+        <p>Chúng tôi gồm:</p>
+        
+        <p class="bold">BÊN A : VIỄN THÔNG PHÚ THỌ</p>
+        <p>- Đại diện: Ông Lê Văn Đức</p>
+        <p>- Chức vụ: Phó Giám đốc</p>
+        <p class="italic">(Theo Giấy ủy quyền số 1653/GUQ-PTO-NSTH ngày 01/10/2025 của Giám đốc Viễn thông Phú Thọ)</p>
+        <p>- Địa chỉ: Số 1468, Đường Hùng Vương, Phường Thanh Miếu, Tỉnh Phú Thọ</p>
+        <p>- Số tài khoản: 110000031172</p>
+        <p>- Ngân hàng: Ngân hàng TMCP Công thương Việt Nam - Chi nhánh Phú Thọ</p>
+        <p>- Mã số thuế: 2600102568</p>
+        
+        <p class="bold">BÊN B : <span class="data-field UQ_DanhXung bold">Ông/Bà</span> <span class="data-field UQ_HoTen bold">...</span></p>
+        <p>- Năm sinh: <span class="data-field UQ_NamSinh">...</span></p>
+        <p>- Địa chỉ: <span class="data-field UQ_DiaChi">...</span></p>
+        <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span></p>
+        <p>- Nơi cấp: Cục cảnh sát QLHC về TTXH</p>
+        <p>- Ngày cấp: <span class="data-field UQ_NgayCap">...</span></p>
+        
+        <p>Sau khi xem xét nhu cầu và khả năng thực tế của hai Bên, Bên A và Bên B đồng ý ký Hợp đồng dịch vụ theo các điều khoản và điều kiện dưới đây:</p>
+        <p class="bold">Điều 1. Nội dung và phạm vi dịch vụ trông nom, bảo vệ trạm viễn thông</p>
+        <p>Bên A thuê Bên B cung cấp dịch vụ trông nom, giám sát và bảo vệ hiện trạng đối với trạm viễn thông của Bên A tại vị trí: nằm trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span> (sau đây gọi là "Trạm BTS <span class="data-field Ten_Tram">...</span>"), nhằm bảo đảm an ninh, an toàn khu vực Trạm và phục vụ công tác quản lý tài sản viễn thông của Bên A.</p>
+        <p>Dịch vụ trông nom, bảo vệ Trạm được thực hiện theo phạm vi phù hợp với tính chất giám sát, trông coi; tập trung vào việc quan sát, theo dõi tình trạng khu vực Trạm và kịp thời thông tin cho Bên A khi phát sinh các tình huống bất thường có thể ảnh hưởng đến an toàn, an ninh hoặc hiện trạng của Trạm.</p>
+        <p>Việc cung cấp dịch vụ của Bên B được thực hiện độc lập, tự chủ, không gắn với hoạt động điều hành, quản lý nhân sự hoặc vận hành kỹ thuật của Bên A và không làm phát sinh quan hệ lao động giữa hai bên.</p>
+        
+        <p class="bold">Điều 2. Phương thức thực hiện dịch vụ</p>
+        <p>Bên B thực hiện dịch vụ trông nom, giám sát và bảo vệ Trạm một cách độc lập, tự chủ, phù hợp với bản chất thuê dịch vụ dân sự.</p>
+        <p>Bên B tự sắp xếp thời gian, tần suất và phương thức trông nom phù hợp với điều kiện thực tế tại khu vực Trạm; việc phối hợp giữa hai bên được thực hiện thông qua trao đổi thông tin khi phát sinh tình huống, không mang tính điều hành công việc thường xuyên.</p>
+        <p>Bên A cung cấp thông tin liên hệ cần thiết để tiếp nhận phản ánh của Bên B khi phát sinh sự cố; không áp dụng cơ chế quản lý nội bộ, không phân công thời gian, không kiểm soát quá trình thực hiện dịch vụ của Bên B.</p>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 7: HỢP ĐỒNG DỊCH VỤ (Tiếp) ================= -->
+        <p class="bold">Điều 3. Thù lao dịch vụ và phương thức thanh toán</p>
+        <p>Thù lao dịch vụ trông nom, bảo vệ Trạm được hai bên thỏa thuận trên cơ sở giá trị dịch vụ cung cấp, phù hợp với điều kiện thực tế tại khu vực Trạm.</p>
+        <p>- Thời gian bắt đầu tính tiền từ ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span>.</p>
+        <p>- Mức thù lao dịch vụ: <span class="data-field Gia_Thue_Thang">...</span> đồng/tháng</p>
+        <p>(Bằng chữ: <span class="data-field Gia_Thue_Chu">...</span>/tháng).</p>
+        <p>- Hình thức thanh toán: chuyển khoản</p>
+        <p>- Thời gian thanh toán: <span class="data-field Ky_Thanh_Toan">...</span></p>
+        
+        <p class="bold">Điều 4. Nghĩa vụ thuế thu nhập cá nhân</p>
+        <p>Thu nhập mà Bên B nhận được theo Hợp đồng này được xác định là thu nhập từ hoạt động cung cấp dịch vụ theo quy định của pháp luật về thuế.</p>
+        <p>Mức thù lao dịch vụ theo Hợp đồng là mức giá trọn gói, được các bên thỏa thuận trên cơ sở điều kiện thực hiện dịch vụ và đã bao gồm yếu tố thuế theo quy định của pháp luật; Bên A không thực hiện thanh toán bổ sung, hỗ trợ, bù trừ hoặc điều chỉnh giá trong bất kỳ trường hợp nào liên quan đến nghĩa vụ thuế thu nhập cá nhân của Bên B.</p>
+        <p>Căn cứ quy định pháp luật về thuế tại thời điểm thanh toán và hồ sơ, văn bản cam kết về thu nhập chịu thuế do Bên B cung cấp; Bên A thực hiện thanh toán đầy đủ thù lao dịch vụ theo mức giá trọn gói đã thỏa thuận.</p>
+        <p>Bên B chịu trách nhiệm kê khai, nộp và quyết toán thuế thu nhập cá nhân đối với toàn bộ thu nhập phát sinh từ Hợp đồng này theo quy định của pháp luật; đồng thời cam kết chịu hoàn toàn trách nhiệm trước cơ quan thuế về tính trung thực, đầy đủ của hồ sơ, cam kết đã cung cấp.</p>
+        <p>Trường hợp cơ quan thuế có yêu cầu giải trình, kiểm tra hoặc xác minh liên quan đến nghĩa vụ thuế thu nhập cá nhân của Bên B, Bên B có trách nhiệm trực tiếp làm việc và thực hiện với cơ quan thuế theo quy định pháp luật; Bên A không chịu trách nhiệm đối với các nghĩa vụ thuế phát sinh từ việc kê khai, nộp hoặc quyết toán thuế của Bên B.</p>
+        
+        <p class="bold">Điều 5. Hiệu lực, sửa đổi và chấm dứt hợp đồng</p>
+        <p>Hợp đồng có hiệu lực kể từ ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span> đến hết ngày <span class="data-field Ngay_Het_Han">...</span> trừ trường hợp chấm dứt trước thời hạn theo thoả thuận của các bên hoặc theo quy định của pháp luật.</p>
+        <p>Việc sửa đổi, bổ sung hoặc gia hạn Hợp đồng được lập thành văn bản và là bộ phận không tách rời của Hợp đồng.</p>
+        <p>Hợp đồng chấm dứt khi hết thời hạn; theo thỏa thuận bằng văn bản của các bên; hoặc theo yêu cầu của cơ quan nhà nước có thẩm quyền theo quy định pháp luật.</p>
+        
+        <p class="bold">Điều 6. Quyền và nghĩa vụ của Bên A</p>
+        <p>Bên A có nghĩa vụ thanh toán thù lao dịch vụ đầy đủ, đúng hạn; cung cấp thông tin cần thiết để phối hợp trông nom Trạm; tiếp nhận và xử lý các thông tin do Bên B phản ánh; và thực hiện các quyền, nghĩa vụ khác theo Hợp đồng và quy định pháp luật.</p>
+        <p class="bold">Điều 7. Quyền và nghĩa vụ của Bên B</p>
+        <p>Bên B có quyền nhận thù lao dịch vụ theo thỏa thuận; tự trang bị điều kiện, phương tiện cá nhân cần thiết để thực hiện dịch vụ; chủ động thực hiện dịch vụ trông nom, giám sát và bảo vệ Trạm; kịp thời thông báo các tình huống bất thường; tuân thủ quy định pháp luật và quy định tại địa phương; chịu trách nhiệm đối với thiệt hại phát sinh do lỗi của mình; và không đại diện cho Bên A trong bất kỳ quan hệ pháp lý nào.</p>
+        <p class="bold">Điều 8. Trách nhiệm và rủi ro</p>
+        <p>Mỗi bên chịu trách nhiệm đối với nghĩa vụ của mình theo Hợp đồng và theo quy định của pháp luật.</p>
+        <p>Bên B tự chịu trách nhiệm về an toàn cá nhân trong quá trình thực hiện dịch vụ; Bên A không chịu trách nhiệm đối với các rủi ro về con người phát sinh trong quá trình Bên B cung cấp dịch vụ, trừ trường hợp do lỗi cố ý hoặc lỗi nghiêm trọng của Bên A theo quy định pháp luật.</p>
+        <p>Trường hợp xảy ra sự kiện bất khả kháng, các bên được miễn trách nhiệm và phối hợp xử lý theo quy định pháp luật.</p>
+        <p class="bold">Điều 9. Giải quyết tranh chấp</p>
+        <p>Mọi tranh chấp phát sinh từ Hợp đồng này được ưu tiên giải quyết thông qua thương lượng; trường hợp không đạt được thỏa thuận thì khởi kiện tại Tòa án có thẩm quyền theo quy định pháp luật.</p>
+        <p class="bold">Điều 10. Điều khoản chung</p>
+        <p>Hai bên cam kết thực hiện đúng theo các điều khoản của hợp đồng.</p>
+        <p>Hợp đồng được ký kết trên cơ sở tự nguyện, bình đẳng, thiện chí và trung thực; các bên đã đọc, hiểu rõ quyền và nghĩa vụ của mình.</p>
+        <p>Hợp đồng được lập thành 02 bản, có giá trị pháp lý như nhau; mỗi bên giữ 01 bản làm căn cứ thực hiện.</p>
+        
+        <div class="signature-box" style="margin-top: 30px;">
+            <div class="signature-col">
+                <div class="bold">ĐẠI DIỆN BÊN A</div>
+                <div class="signature-space"></div>
+                <div class="bold">Lê Văn Đức</div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">ĐẠI DIỆN BÊN B</div>
+                <div class="signature-space"></div>
+                <div class="bold"><span class="data-field UQ_HoTen">...</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 8: CV PHỐI HỢP SỬ DỤNG MẶT BẰNG TỪ VNPT ================= -->
+        <table class="table-custom" style="border: none; margin-bottom: 20px;">
+            <tr>
+                <td style="border: none; width: 40%; text-align: center; vertical-align: top;">
+                    <div class="bold">TẬP ĐOÀN BƯU CHÍNH</div>
+                    <div class="bold">VIỄN THÔNG VIỆT NAM</div>
+                    <div class="bold">VIỄN THÔNG PHÚ THỌ</div>
+                    <div>Số: ......../CV-VNPT-TTHT</div>
+                    <div class="italic" style="font-size: 11pt;">V/v: phối hợp tạo điều kiện sử dụng mặt bằng triển khai trạm viễn thông phục vụ chuyển đổi số</div>
+                </td>
+                <td style="border: none; width: 60%; text-align: center; vertical-align: top;">
+                    <div class="bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="bold">Độc lập - Tự do - Hạnh phúc</div>
+                    <div>------------------</div>
+                    <div class="italic">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="center bold" style="margin: 20px 0;">
+            Kính gửi: <span class="data-field Ten_Co_Quan_HCC bold">...</span>
+        </div>
+        
+        <p>Căn cứ Luật Đất đai năm 2024; Luật Viễn thông; Luật Quản lý, sử dụng tài sản công và các văn bản hướng dẫn thi hành;</p>
+        <p>Căn cứ Nghị quyết số 57-NQ/TW của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, trong đó xác định phát triển hạ tầng số là ưu tiên quốc gia, là nền tảng phục vụ chính quyền số, kinh tế số, xã hội số và lợi ích công cộng;</p>
+        <p>Căn cứ chức năng, nhiệm vụ được giao trong công tác quản lý, vận hành và phát triển hạ tầng viễn thông trên địa bàn tỉnh Phú Thọ,</p>
+        <p>Viễn thông Phú Thọ trân trọng báo cáo và đề nghị <span class="data-field Ten_Co_Quan_HCC">...</span> xem xét, phối hợp một số nội dung sau:</p>
+        <p>Hiện nay, để bảo đảm thông tin liên lạc, cung cấp dịch vụ viễn thông ổn định, đáp ứng yêu cầu phát triển kinh tế - xã hội và triển khai các nhiệm vụ chuyển đổi số trên địa bàn, Viễn thông Phú Thọ có nhu cầu duy trì, lắp đặt và vận hành trạm viễn thông (<span class="data-field Ma_Tram">...</span>) tại:</p>
+        <p>- Toạ độ: Longitude <span class="data-field Longitude">...</span>; Latitude <span class="data-field Latitude">...</span></p>
+        <p>- Diện tích: khoảng <span class="data-field Dien_Tich_Thue">...</span>m2</p>
+        <p>Vị trí nằm trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span>, địa bàn <span class="data-field Dia_Chi_Tram">...</span>.</p>
+        <p>Việc triển khai trạm viễn thông tại vị trí nêu trên nhằm phục vụ lợi ích công cộng, bảo đảm hạ tầng thông tin - truyền thông, góp phần thực hiện chủ trương phát triển hạ tầng số, chuyển đổi số quốc gia theo Nghị quyết số 57-NQ/TW của Bộ Chính trị; không nhằm mục đích kinh doanh khai thác mặt bằng, không thương mại hóa quyền sử dụng đất và không làm phát sinh nghĩa vụ tài chính đối với địa phương.</p>
+        <p>Viễn thông Phú Thọ trân trọng đề nghị <span class="data-field Ten_Co_Quan_HCC">...</span> xem xét, thống nhất chủ trương phối hợp, tạo điều kiện cho đơn vị được sử dụng một phần diện tích mặt bằng tại vị trí nêu trên để triển khai trạm phát sóng phục vụ nhiệm vụ công ích; đồng thời phối hợp thực hiện các thủ tục cần thiết theo quy định pháp luật, bao gồm việc xác nhận hiện trạng và ký kết Thỏa thuận sử dụng mặt bằng trên cơ sở nguyên tắc phối hợp thực hiện nhiệm vụ công, phù hợp quy hoạch và chủ trương của cơ quan nhà nước có thẩm quyền.</p>
+        <p>Viễn thông Phú Thọ cam kết trong quá trình triển khai sẽ chấp hành nghiêm các quy định của pháp luật; bảo đảm an toàn công trình, an ninh trật tự, vệ sinh môi trường; phối hợp chặt chẽ với Ủy ban nhân dân và các cơ quan liên quan, không làm ảnh hưởng đến hoạt động quản lý nhà nước và đời sống của Nhân dân địa phương.</p>
+        <p>Rất mong nhận được sự quan tâm, phối hợp và thống nhất chủ trương của <span class="data-field Ten_Co_Quan_HCC">...</span> để Viễn thông Phú Thọ có cơ sở triển khai thực hiện theo đúng quy định.</p>
+        <p>Xin trân trọng cảm ơn./.</p>
+        
+        <div class="signature-box" style="margin-top: 30px;">
+            <div class="signature-col" style="text-align: left;">
+                <div class="italic bold">Nơi nhận:</div>
+                <div class="italic">- Như kính gửi;</div>
+                <div class="italic">- Lưu VT.</div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">KT. GIÁM ĐỐC</div>
+                <div class="bold">PHÓ GIÁM ĐỐC</div>
+                <div class="signature-space"></div>
+                <div class="bold">Lê Văn Đức</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <!-- ================= TRANG 9: CV SỬ DỤNG MẶT BẰNG TỪ HCC ================= -->
+        <table class="table-custom" style="border: none; margin-bottom: 20px;">
+            <tr>
+                <td style="border: none; width: 40%; text-align: center; vertical-align: top;">
+                    <div class="bold"><span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></div>
+                    <div>Số: ......../CV-VP</div>
+                    <div class="italic" style="font-size: 11pt;">V/v: sử dụng mặt bằng triển khai trạm viễn thông phục vụ chuyển đổi số</div>
+                </td>
+                <td style="border: none; width: 60%; text-align: center; vertical-align: top;">
+                    <div class="bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="bold">Độc lập - Tự do - Hạnh phúc</div>
+                    <div>------------------</div>
+                    <div class="italic">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="center bold" style="margin: 20px 0;">
+            Kính gửi: Viễn thông Phú Thọ
+        </div>
+        
+        <p>Căn cứ Nghị quyết số 57-NQ/TW của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, trong đó xác định phát triển hạ tầng số là ưu tiên quốc gia, phục vụ lợi ích công cộng;</p>
+        <p>Căn cứ chức năng, nhiệm vụ quản lý nhà nước của <span class="data-field Ten_Co_Quan_HCC">...</span> đối với đất đai, tài sản công trên địa bàn;</p>
+        <p>Sau khi xem xét đề nghị của Viễn thông Phú Thọ và trên cơ sở trao đổi, thống nhất tại <span class="data-field Ten_Co_Quan_HCC">...</span>.</p>
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> thông báo thống nhất chủ trương như sau:</p>
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> thống nhất phối hợp, tạo điều kiện để Viễn thông Phú Thọ được sử dụng một phần diện tích mặt bằng tại vị trí nằm trong khuôn viên <span class="data-field Ten_Co_Quan_HCC">...</span>, thuộc địa bàn <span class="data-field Dia_Chi_Tram">...</span> nhằm lắp đặt, duy trì và vận hành trạm phát sóng phục vụ cung cấp dịch vụ viễn thông, công nghệ thông tin; bảo đảm thông tin liên lạc; phát triển hạ tầng số, góp phần thực hiện chủ trương chuyển đổi số quốc gia theo Nghị quyết số 57-NQ/TW của Bộ Chính trị, phục vụ lợi ích công cộng, lợi ích của Nhà nước và Nhân dân trên địa bàn.</p>
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> giao các bộ phận chuyên môn phối hợp với Viễn thông Phú Thọ thực hiện việc xác nhận hiện trạng, vị trí mặt bằng và ký kết Thỏa thuận sử dụng mặt bằng theo đúng quy định pháp luật, bảo đảm phù hợp với quy hoạch, kế hoạch sử dụng đất và chủ trương của cơ quan nhà nước có thẩm quyền tại từng thời kỳ.</p>
+        <p><span class="data-field Ten_Co_Quan_HCC">...</span> thông báo để Viễn thông Phú Thọ và các đơn vị liên quan biết, phối hợp thực hiện./.</p>
+        <p>Trân trọng./.</p>
+        
+        <div class="signature-box" style="margin-top: 30px;">
+            <div class="signature-col" style="text-align: left;">
+                <div class="italic bold">Nơi nhận:</div>
+                <div class="italic">- Như kính gửi;</div>
+                <div class="italic">- Lưu VT.</div>
+            </div>
+            <div class="signature-col">
+                <div class="bold">VĂN PHÒNG</div>
+                <div class="bold"><span class="data-field Ten_Co_Quan_HCC bold" style="text-transform: uppercase;">...</span></div>
+                <div class="signature-space"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        // API lấy dữ liệu từ Google Sheet
+        const API_URL = "https://script.google.com/macros/s/AKfycbz5zkbEhwo0SyltYy77nPN91HAMEoFhNy5V3GSaveX2iaLM5RevCvuOfzBupiTnSFtn/exec";
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const idHopDong = urlParams.get('id');
+
+        if (!idHopDong) {
+            document.getElementById('loading').innerHTML = "Lỗi: Không tìm thấy ID Hợp đồng trong đường dẫn (URL).";
+        } else {
+            fetch(`${API_URL}?id=${idHopDong}`)
+                .then(response => response.json())
+                .then(res => {
+                    if (res.success) {
+                        const data = res.data;
+                        
+                        const toTitleCase = (str) => {
+                            if (!str) return '...';
+                            return String(str).toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                        };
+                        
+                        const setTextForAll = (className, text) => {
+                            const els = document.querySelectorAll('.' + className);
+                            els.forEach(el => {
+                                el.innerText = text || '...';
+                            });
+                        };
+
+                        let danhXung = 'ông/bà';
+                        let gt = data.Gioitinh || data.GioiTinh;
+                        if (gt) {
+                            if (String(gt).toLowerCase() === 'nam') danhXung = 'ông';
+                            else if (String(gt).toLowerCase() === 'nữ' || String(gt).toLowerCase() === 'nu') danhXung = 'bà';
+                        }
+                        setTextForAll('Ben_A_Danh_Xung', danhXung);
+
+                        setTextForAll('So_Hop_Dong', data.SoHopDong);
+                        setTextForAll('Ben_A_Ho_Ten', toTitleCase(data.HoTen));
+                        setTextForAll('Ben_A_CCCD', data.CCCD);
+                        setTextForAll('Ben_A_Noi_Cap', 'Cục cảnh sát QLHC về TTXH'); 
+                        setTextForAll('Ben_A_Dia_Chi', data.DiaChiThuongTru);
+                        setTextForAll('Ben_A_SDT', data.SoDienThoai ? '0' + data.SoDienThoai : '...');
+                        setTextForAll('Ben_A_STK', data.SoTaiKhoan);
+                        setTextForAll('Ben_A_Ngan_Hang', data.NganHang);
+                        setTextForAll('Vi_Tri_Thue', data.TenTram);
+                        setTextForAll('Dien_Tich_Thue', data.DienTichThue_m2);
+                        
+                        // Mới bổ sung cho mẫu NVH
+                        setTextForAll('Ten_Co_Quan_HCC', data.TenCoQuanHCC || '........................');
+                        setTextForAll('Dia_Chi_Tram', data.DiaChiTram || '........................');
+                        
+                        const elsKyThanhToan = document.querySelectorAll('.Ky_Thanh_Toan');
+                        elsKyThanhToan.forEach(el => {
+                            el.innerText = data.KyThanhToan ? ' ' + data.KyThanhToan : '';
+                        });
+
+                        let nhanVien = data.NhanVienCapNhat || data.NguoiCapNhat || data.Nhan_Vien_Cap_Nhat;
+                        if (!nhanVien || String(nhanVien).trim() === '') {
+                            for (let key in data) {
+                                let normalizedKey = key.toLowerCase().replace(/\s/g, '');
+                                if (normalizedKey === 'nguoicapnhat' || normalizedKey === 'nhanviencapnhat') {
+                                    nhanVien = data[key];
+                                    break;
+                                }
+                            }
+                        }
+                        let nhanVienCapNhat = (nhanVien && String(nhanVien).trim() !== '') ? nhanVien : '........................';
+                        setTextForAll('Nhan_Vien_Cap_Nhat', toTitleCase(nhanVienCapNhat));
+
+                        let isUyQuyen = data.CoUyQuyenNhanTien || false;
+                        if (String(data.CoUyQuyenNhanTien).toLowerCase() === 'true') {
+                            isUyQuyen = true;
+                        }
+                        if (data.UQ_HoTen && String(data.UQ_HoTen).trim() !== '') {
+                            isUyQuyen = true;
+                        }
+
+                        if (isUyQuyen) {
+                            setTextForAll('Thu_Huong_Ho_Ten', toTitleCase(data.UQ_HoTen || '................'));
+                            setTextForAll('Thu_Huong_STK', data.UQ_SoTaiKhoan || '................');
+                            setTextForAll('Thu_Huong_Ngan_Hang', data.UQ_NganHang || '................');
+                        } else {
+                            setTextForAll('Thu_Huong_Ho_Ten', toTitleCase(data.HoTen || '................'));
+                            setTextForAll('Thu_Huong_STK', data.SoTaiKhoan || '................');
+                            setTextForAll('Thu_Huong_Ngan_Hang', data.NganHang || '................');
+                        }
+
+                        let thoiHan = data.ThoiHanNam;
+                        if(thoiHan && thoiHan.toString().includes('(')) {
+                            thoiHan = thoiHan.toString().split('(')[0].trim();
+                        }
+                        setTextForAll('Thoi_Han_Thue', thoiHan);
+                        
+                        const docTienBangChu = (function() {
+                            var mangso = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+                            function dochangchuc(so, daydu) {
+                                var chuoi = "";
+                                var chuc = Math.floor(so / 10);
+                                var donvi = so % 10;
+                                if (chuc > 1) {
+                                    chuoi = " " + mangso[chuc] + " mươi";
+                                    if (donvi == 1) { chuoi += " mốt"; }
+                                } else if (chuc == 1) {
+                                    chuoi = " mười";
+                                    if (donvi == 1) { chuoi += " một"; }
+                                } else if (daydu && donvi > 0) {
+                                    chuoi = " lẻ";
+                                }
+                                if (donvi == 5 && chuc >= 1) {
+                                    chuoi += " lăm";
+                                } else if (donvi == 4 && chuc >= 1) {
+                                    chuoi += " tư";
+                                } else if (donvi > 0 && (donvi != 1 || chuc == 0)) {
+                                    chuoi += " " + mangso[donvi];
+                                }
+                                return chuoi;
+                            }
+                            function docblock(so, daydu) {
+                                var chuoi = "";
+                                var tram = Math.floor(so / 100);
+                                so = so % 100;
+                                if (daydu || tram > 0) {
+                                    chuoi = " " + mangso[tram] + " trăm";
+                                    chuoi += dochangchuc(so, true);
+                                } else {
+                                    chuoi = dochangchuc(so, false);
+                                }
+                                return chuoi;
+                            }
+                            function dochangtrieu(so, daydu) {
+                                var chuoi = "";
+                                var trieu = Math.floor(so / 1000000);
+                                so = so % 1000000;
+                                if (trieu > 0) {
+                                    chuoi = docblock(trieu, daydu) + " triệu";
+                                    daydu = true;
+                                }
+                                var nghin = Math.floor(so / 1000);
+                                so = so % 1000;
+                                if (nghin > 0) {
+                                    chuoi += docblock(nghin, daydu) + " nghìn";
+                                    daydu = true;
+                                }
+                                if (so > 0) {
+                                    chuoi += docblock(so, daydu);
+                                }
+                                return chuoi;
+                            }
+                            return function(so) {
+                                if (so == 0) return mangso[0] + " đồng chẵn";
+                                var chuoi = "", hauto = "";
+                                do {
+                                    var ty = so % 1000000000;
+                                    so = Math.floor(so / 1000000000);
+                                    if (so > 0) {
+                                        chuoi = dochangtrieu(ty, true) + hauto + chuoi;
+                                    } else {
+                                        chuoi = dochangtrieu(ty, false) + hauto + chuoi;
+                                    }
+                                    hauto = " tỷ";
+                                } while (so > 0);
+                                
+                                let result = chuoi.trim();
+                                if (result.length > 0) {
+                                    result = result.charAt(0).toUpperCase() + result.slice(1);
+                                }
+                                return result + " đồng chẵn";
+                            }
+                        })();
+
+                        // Định dạng tiền tệ
+                        if (data.GiaThueThang) {
+                            const giaThang = Number(data.GiaThueThang);
+                            setTextForAll('Gia_Thue_Thang', giaThang.toLocaleString('vi-VN'));
+                            setTextForAll('Gia_Thue_Chu', docTienBangChu(giaThang));
+                        }
+                        
+                        if (data.SotienThanhToan) {
+                            const soTien = Number(data.SotienThanhToan);
+                            setTextForAll('So_Tien_Thanh_Toan', soTien.toLocaleString('vi-VN'));
+                            setTextForAll('So_Tien_Chu', docTienBangChu(soTien));
+                        } else if (data.GiaThueThang) {
+                            const giaThang = Number(data.GiaThueThang);
+                            const tongTien = giaThang * 12;
+                            setTextForAll('So_Tien_Thanh_Toan', tongTien.toLocaleString('vi-VN'));
+                            setTextForAll('So_Tien_Chu', docTienBangChu(tongTien));
+                        }
+
+                        // Xử lý ngày tháng
+                        if (data.NgayKyHD) {
+                            const date = new Date(data.NgayKyHD);
+                            if (!isNaN(date.getTime())) {
+                                setTextForAll('Ngay_Ky_Day', date.getDate().toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Ky_Month', (date.getMonth() + 1).toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Ky_Year', date.getFullYear());
+                            }
+                        }
+                        if (data.NgayDuyet) {
+                            const dateDuyet = new Date(data.NgayDuyet);
+                            if (!isNaN(dateDuyet.getTime())) {
+                                setTextForAll('Ngay_Duyet_Day', dateDuyet.getDate().toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Duyet_Month', (dateDuyet.getMonth() + 1).toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Duyet_Year', dateDuyet.getFullYear());
+                            }
+                        } else {
+                            setTextForAll('Ngay_Duyet_Day', document.querySelector('.Ngay_Ky_Day')?.innerText || '...');
+                            setTextForAll('Ngay_Duyet_Month', document.querySelector('.Ngay_Ky_Month')?.innerText || '...');
+                            setTextForAll('Ngay_Duyet_Year', document.querySelector('.Ngay_Ky_Year')?.innerText || '...');
+                        }
+                        if (data.CCCD_NgayCap) {
+                            const dateCap = new Date(data.CCCD_NgayCap);
+                            if (!isNaN(dateCap.getTime())) {
+                                setTextForAll('Ben_A_Ngay_Cap', dateCap.toLocaleDateString('vi-VN'));
+                            }
+                        }
+
+                        
+                        setTextForAll('Chuc_Vu', data.ChucVu || '................');
+                        setTextForAll('Ten_Tram', data.TenTram || '................');
+                        setTextForAll('Ma_Tram', data.MaTram || '................');
+                        setTextForAll('Dia_Chi_Thuong_Tru', data.DiaChiThuongTru || '................');
+                        setTextForAll('So_Tai_Khoan', data.SoTaiKhoan || '................');
+                        setTextForAll('Ngan_Hang', data.NganHang || '................');
+                        setTextForAll('Ho_Ten', toTitleCase(data.HoTen || '................'));
+                        
+                        setTextForAll('UQ_NamSinh', data.UQ_NamSinh || '........');
+                        setTextForAll('UQ_CCCD', data.UQ_CCCD || '................');
+                        setTextForAll('UQ_DiaChi', data.UQ_DiaChi || '................');
+                        
+                        let uqDanhXung = 'ông/bà';
+                        if (data.UQ_GioiTinh) {
+                            if (String(data.UQ_GioiTinh).toLowerCase() === 'nam') uqDanhXung = 'ông';
+                            else if (String(data.UQ_GioiTinh).toLowerCase() === 'nữ' || String(data.UQ_GioiTinh).toLowerCase() === 'nu') uqDanhXung = 'bà';
+                        }
+                        setTextForAll('UQ_DanhXung', uqDanhXung);
+                        
+                        if (data.UQ_CCCD_NgayCap) {
+                            const uqDateCap = new Date(data.UQ_CCCD_NgayCap);
+                            if (!isNaN(uqDateCap.getTime())) {
+                                setTextForAll('UQ_NgayCap', uqDateCap.toLocaleDateString('vi-VN'));
+                            }
+                        } else {
+                            setTextForAll('UQ_NgayCap', '................');
+                        }
+
+                        let thoiHanSo = 5;
+                        if(data.ThoiHanNam) {
+                            thoiHanSo = Number(String(data.ThoiHanNam).split('(')[0].trim()) || 5;
+                        }
+                        setTextForAll('Thoi_Han_Chu', docTienBangChu(thoiHanSo).replace(' đồng chẵn', '').toLowerCase());
+                        
+                        let ngayHetHan = new Date();
+                        if (data.NgayKyHD) {
+                            let d = new Date(data.NgayKyHD);
+                            if (!isNaN(d.getTime())) {
+                                ngayHetHan = new Date(d.getFullYear() + thoiHanSo, d.getMonth(), d.getDate());
+                                // trừ đi 1 ngày
+                                ngayHetHan.setDate(ngayHetHan.getDate() - 1);
+                                setTextForAll('Ngay_Het_Han', ngayHetHan.toLocaleDateString('vi-VN'));
+                            } else {
+                                setTextForAll('Ngay_Het_Han', '................');
+                            }
+                        } else {
+                            setTextForAll('Ngay_Het_Han', '................');
+                        }
+
+                        setTextForAll('Longitude', data.KinhDo || '................');
+                        setTextForAll('Latitude', data.ViDo || '................');
+
+                        // Xử lý viết hoa bằng JavaScript (khắc phục lỗi font của html2canvas không nhận text-transform: uppercase)
+                        document.querySelectorAll('[style*="text-transform: uppercase"]').forEach(el => {
+                            if (el.innerText) {
+                                el.innerText = el.innerText.toUpperCase();
+                            }
+                        });
+
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('action-buttons').style.display = 'block';
+                        document.getElementById('content').style.display = 'block';
+                        
+                        // Tự động bật hộp thoại in
+                        setTimeout(() => {
+                            window.print();
+                        }, 500);
+
+                    } else {
+                        document.getElementById('loading').innerHTML = "Lỗi: Không tìm thấy hợp đồng " + idHopDong;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loading').innerHTML = "Lỗi kết nối máy chủ: " + error.message;
+                });
+        }
+
+        function exportHTMLToDoc() {
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->";
+            var style = "<style>@page Section1 { size: 210mm 297mm; margin: 15mm 20mm 15mm 20mm; mso-page-orientation: portrait; mso-header-margin: 35.4pt; mso-footer-margin: 35.4pt; mso-paper-source: 0; } div.Section1 { page: Section1; } body { font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.3; } p { margin: 3px 0; text-align: justify; } .center { text-align: center; } .bold { font-weight: bold; } .italic { font-style: italic; } .title { font-size: 16pt; font-weight: bold; margin-top: 10px; margin-bottom: 10px; } table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid black; padding: 5px; } .table-custom td, .table-custom th { border: 1px solid black; } .signature-space { height: 90px; }</style>";
+            var contentClone = document.getElementById('content').cloneNode(true);
+            
+            contentClone.querySelectorAll('.bold').forEach(el => el.style.fontWeight = 'bold');
+            contentClone.querySelectorAll('.italic').forEach(el => el.style.fontStyle = 'italic');
+            contentClone.querySelectorAll('.center').forEach(el => el.style.textAlign = 'center');
+            contentClone.querySelectorAll('.title').forEach(el => {
+                el.style.fontWeight = 'bold';
+                el.style.fontSize = '16pt';
+                el.style.textAlign = 'center';
+            });
+            
+            contentClone.querySelectorAll('.signature-space').forEach(el => {
+                el.innerHTML = '<br><br><br><br><br><br><br>';
+            });
+            
+            var sigBoxes = contentClone.querySelectorAll('.signature-box');
+            sigBoxes.forEach(box => {
+                var cols = box.querySelectorAll('.signature-col');
+                var table = document.createElement('table');
+                table.style.width = '100%';
+                table.style.border = 'none';
+                var tr = document.createElement('tr');
+                cols.forEach(col => {
+                    var td = document.createElement('td');
+                    td.style.width = (100 / cols.length) + '%';
+                    td.style.textAlign = 'center';
+                    td.style.verticalAlign = 'top';
+                    td.style.border = 'none';
+                    td.innerHTML = col.innerHTML;
+                    tr.appendChild(td);
+                });
+                table.appendChild(tr);
+                box.parentNode.replaceChild(table, box);
+            });
+
+            var printPages = contentClone.querySelectorAll('.print-page');
+            printPages.forEach((pp, index) => {
+                if (index > 0) {
+                    var pbDiv = document.createElement('div');
+                    pbDiv.innerHTML = '<br clear="all" style="mso-special-character:line-break;page-break-before:always">';
+                    pp.parentNode.insertBefore(pbDiv, pp);
+                }
+                while (pp.firstChild) {
+                    pp.parentNode.insertBefore(pp.firstChild, pp);
+                }
+                pp.parentNode.removeChild(pp);
+            });
+            
+            var html = header + style + "</head><body><div class='Section1'>" + contentClone.innerHTML + "</div></body></html>";
+            var blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+            var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'HopDong_NVH';
+            if (soHD === '...') soHD = 'HopDong_NVH';
+            soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
+            
+            var filename = soHD + '.doc';
+            var downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+            
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = filename;
+                downloadLink.click();
+            }
+            document.body.removeChild(downloadLink);
+        }
+
+        function exportHTMLToPDF() {
+            var soHD = document.querySelector('.So_Hop_Dong') ? document.querySelector('.So_Hop_Dong').innerText : 'HopDong_NVH';
+            if (soHD === '...') soHD = 'HopDong_NVH';
+            soHD = soHD.replace(/[\/\\?%*:|"<>]/g, '-');
+            var filename = soHD + '.pdf';
+            
+            document.getElementById('action-buttons').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading').innerText = "Đang tạo file PDF... Vui lòng đợi!";
+            
+            var printPages = document.querySelectorAll('#content .print-page');
+            var origStyles = [];
+            printPages.forEach(function(pp) {
+                origStyles.push(pp.style.cssText);
+                pp.style.margin = '0';
+            });
+            
+            var promises = [];
+            printPages.forEach(function(pp) {
+                promises.push(html2canvas(pp, { scale: 2, useCORS: true }));
+            });
+            
+            Promise.all(promises).then(function(canvases) {
+                var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+                var marginTop = 15, marginLeft = 20;
+                var innerWidth = 170; 
+                var innerHeight = 267; 
+                var isFirstPage = true;
+                
+                canvases.forEach(function(canvas) {
+                    var imgWidthMm = innerWidth;
+                    var imgHeightMm = canvas.height * innerWidth / canvas.width;
+                    
+                    if (imgHeightMm <= innerHeight) {
+                        if (!isFirstPage) pdf.addPage();
+                        isFirstPage = false;
+                        var imgData = canvas.toDataURL('image/jpeg', 0.98);
+                        pdf.addImage(imgData, 'JPEG', marginLeft, marginTop, imgWidthMm, imgHeightMm);
+                    } else {
+                        var pxPerMm = canvas.width / innerWidth;
+                        var pageHeightPx = Math.floor(innerHeight * pxPerMm);
+                        var totalPages = Math.ceil(canvas.height / pageHeightPx);
+                        
+                        for (var p = 0; p < totalPages; p++) {
+                            if (!isFirstPage) pdf.addPage();
+                            isFirstPage = false;
+                            var srcY = p * pageHeightPx;
+                            var srcH = Math.min(pageHeightPx, canvas.height - srcY);
+                            
+                            var pageCanvas = document.createElement('canvas');
+                            pageCanvas.width = canvas.width;
+                            pageCanvas.height = srcH;
+                            var ctx = pageCanvas.getContext('2d');
+                            ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+                            
+                            var pageImgData = pageCanvas.toDataURL('image/jpeg', 0.98);
+                            var pageImgHeightMm = srcH * innerWidth / canvas.width;
+                            pdf.addImage(pageImgData, 'JPEG', marginLeft, marginTop, imgWidthMm, pageImgHeightMm);
+                        }
+                    }
+                });
+                
+                pdf.save(filename);
+                printPages.forEach(function(pp, i) {
+                    pp.style.cssText = origStyles[i] || '';
+                });
+                document.getElementById('action-buttons').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+            }).catch(function(err) {
+                printPages.forEach(function(pp, i) {
+                    pp.style.cssText = origStyles[i] || '';
+                });
+                console.error(err);
+                document.getElementById('loading').innerText = "Lỗi xuất PDF: " + err.message;
+                document.getElementById('action-buttons').style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
