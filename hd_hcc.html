@@ -177,7 +177,7 @@
         <p><span class="data-field Ho_Ten">...</span> giới thiệu để Viễn thông Phú Thọ tham khảo, xem xét thông tin về cá nhân cư trú trên địa bàn xã, có điều kiện phù hợp về vị trí sinh sống và thời gian, cụ thể như sau:</p>
         <p>- Họ và tên: <span class="data-field UQ_HoTen bold">...</span></p>
         <p>- Năm sinh: <span class="data-field UQ_NamSinh">...</span></p>
-        <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span></p>
+        <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span> Cấp ngày: <span class="data-field UQ_NgayCap">...</span></p>
         <p>- Cấp ngày: <span class="data-field UQ_NgayCap">...</span></p>
         <p>- Địa chỉ cư trú: <span class="data-field UQ_DiaChi">...</span></p>
         <p>Thông tin giới thiệu nêu trên được cung cấp nhằm phục vụ việc xem xét của Viễn thông Phú Thọ theo thẩm quyền.</p>
@@ -316,7 +316,7 @@
         <p class="bold">BÊN B : <span class="data-field UQ_DanhXung bold">Ông/Bà</span> <span class="data-field UQ_HoTen bold">...</span></p>
         <p>- Năm sinh: <span class="data-field UQ_NamSinh">...</span></p>
         <p>- Địa chỉ: <span class="data-field UQ_DiaChi">...</span></p>
-        <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span></p>
+        <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span> Cấp ngày: <span class="data-field UQ_NgayCap">...</span></p>
         <p>- Nơi cấp: Cục cảnh sát QLHC về TTXH</p>
         <p>- Ngày cấp: <span class="data-field UQ_NgayCap">...</span></p>
         
@@ -704,6 +704,7 @@
                         setTextForAll('Nguoi_Dai_Dien', toTitleCase(data.NguoiDaiDien || '................'));
                         setTextForAll('Ho_Ten', data.HoTen || '................');
                         
+                        setTextForAll('UQ_HoTen', toTitleCase(data.UQ_HoTen || '................'));
                         setTextForAll('UQ_NamSinh', data.UQ_NamSinh || '........');
                         setTextForAll('UQ_CCCD', data.UQ_CCCD || '................');
                         setTextForAll('UQ_DiaChi', data.UQ_DiaChi || '................');
