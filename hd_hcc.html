@@ -692,7 +692,11 @@
                             let displayDate = String(data.CCCD_NgayCap).trim();
                             if (displayDate.includes('T') && displayDate.match(/^\d{4}-\d{2}-\d{2}T/)) {
                                 const d = new Date(displayDate);
-                                if (!isNaN(d.getTime())) displayDate = d.toLocaleDateString('vi-VN');
+                                if (!isNaN(d.getTime())) {
+                                    const day = String(d.getDate()).padStart(2, '0');
+                                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                                    displayDate = `${day}/${month}/${d.getFullYear()}`;
+                                }
                             } else if (displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
                                 const parts = displayDate.split('-');
                                 displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
@@ -716,7 +720,11 @@
                             let displayDate = String(uqNgaySinhData).trim();
                             if (displayDate.includes('T') && displayDate.match(/^\d{4}-\d{2}-\d{2}T/)) {
                                 const d = new Date(displayDate);
-                                if (!isNaN(d.getTime())) displayDate = d.toLocaleDateString('vi-VN');
+                                if (!isNaN(d.getTime())) {
+                                    const day = String(d.getDate()).padStart(2, '0');
+                                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                                    displayDate = `${day}/${month}/${d.getFullYear()}`;
+                                }
                             } else if (displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
                                 const parts = displayDate.split('-');
                                 displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
@@ -744,7 +752,11 @@
                             let displayDate = String(data.UQ_CCCD_NgayCap).trim();
                             if (displayDate.includes('T') && displayDate.match(/^\d{4}-\d{2}-\d{2}T/)) {
                                 const d = new Date(displayDate);
-                                if (!isNaN(d.getTime())) displayDate = d.toLocaleDateString('vi-VN');
+                                if (!isNaN(d.getTime())) {
+                                    const day = String(d.getDate()).padStart(2, '0');
+                                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                                    displayDate = `${day}/${month}/${d.getFullYear()}`;
+                                }
                             } else if (displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
                                 const parts = displayDate.split('-');
                                 displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
