@@ -265,7 +265,7 @@
             Độc lập - Tự do - Hạnh phúc<br>
             --------------------
         </div>
-        <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></div>
+        <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Duyet_Day">...</span> tháng <span class="data-field Ngay_Duyet_Month">...</span> năm <span class="data-field Ngay_Duyet_Year">...</span></div>
         <div class="center title">GIẤY ĐỀ NGHỊ THANH TOÁN</div>
         
         <p class="bold italic">Kính gửi: Viễn thông Phú Thọ</p>
@@ -277,7 +277,7 @@
         <p>Đề nghị thanh toán số tiền: <span class="data-field So_Tien_Thanh_Toan">...</span> VNĐ</p>
         <p>(Viết bằng chữ: <span class="data-field bold italic So_Tien_Chu">...</span>)</p>
         
-        <p>Lý do thanh toán: Thanh toán tiền thuê đất đặt trạm <span class="data-field Vi_Tri_Thue">...</span><span class="data-field Ky_Thanh_Toan"></span> theo hợp đồng số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐDV-TTHTPTO ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></p>
+        <p>Lý do thanh toán: Thanh toán tiền phối hợp quản lý, trông coi và bảo vệ trạm <span class="data-field Vi_Tri_Thue">...</span><span class="data-field Ky_Thanh_Toan"></span> theo hợp đồng số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐDV-TTHTPTO ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></p>
         
         <p>Số tiền trên được chuyển khoản như sau:</p>
         <p>- Người thụ hưởng: <span class="data-field Ben_A_Ho_Ten">...</span></p>
@@ -307,7 +307,7 @@
                 <td style="width: 65%; text-align: center; border: none; vertical-align: top;">
                     <span class="bold" style="font-size: 13pt; white-space: nowrap;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</span><br>
                     <span class="bold" style="font-size: 13pt; text-decoration: underline;">Độc lập - Tự do - Hạnh phúc</span><br>
-                    <span class="italic" style="font-size: 13pt; display: block; margin-top: 5px;">Phú Thọ, ngày <span class="data-field Ngay_Ky_Day">...</span> tháng <span class="data-field Ngay_Ky_Month">...</span> năm <span class="data-field Ngay_Ky_Year">...</span></span>
+                    <span class="italic" style="font-size: 13pt; display: block; margin-top: 5px;">Phú Thọ, ngày <span class="data-field Ngay_Duyet_Day">...</span> tháng <span class="data-field Ngay_Duyet_Month">...</span> năm <span class="data-field Ngay_Duyet_Year">...</span></span>
                 </td>
             </tr>
         </table>
@@ -326,7 +326,7 @@
             </tr>
             <tr>
                 <td class="center">1</td>
-                <td>Thanh toán tiền thuê đất đặt trạm BTS<span class="data-field Ky_Thanh_Toan"></span>: Trạm <span class="data-field Vi_Tri_Thue">...</span> theo HĐ số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐDV-TTHTPTO ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></td>
+                <td>Thanh toán tiền phối hợp quản lý, trông coi và bảo vệ trạm BTS<span class="data-field Ky_Thanh_Toan"></span>: Trạm <span class="data-field Vi_Tri_Thue">...</span> theo HĐ số <span class="data-field So_Hop_Dong">...</span>/<span class="data-field Ngay_Ky_Year">...</span>/HĐDV-TTHTPTO ký ngày <span class="data-field Ngay_Ky_Day">...</span>/<span class="data-field Ngay_Ky_Month">...</span>/<span class="data-field Ngay_Ky_Year">...</span></td>
                 <td class="center"><span class="data-field So_Tien_Thanh_Toan">...</span></td>
                 <td></td>
             </tr>
@@ -581,6 +581,18 @@
                                 setTextForAll('Ngay_Ky_Month', (date.getMonth() + 1).toString().padStart(2, '0'));
                                 setTextForAll('Ngay_Ky_Year', date.getFullYear());
                             }
+                        }
+                        if (data.NgayDuyet) {
+                            const dateDuyet = new Date(data.NgayDuyet);
+                            if (!isNaN(dateDuyet.getTime())) {
+                                setTextForAll('Ngay_Duyet_Day', dateDuyet.getDate().toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Duyet_Month', (dateDuyet.getMonth() + 1).toString().padStart(2, '0'));
+                                setTextForAll('Ngay_Duyet_Year', dateDuyet.getFullYear());
+                            }
+                        } else {
+                            setTextForAll('Ngay_Duyet_Day', document.querySelector('.Ngay_Ky_Day')?.innerText || '...');
+                            setTextForAll('Ngay_Duyet_Month', document.querySelector('.Ngay_Ky_Month')?.innerText || '...');
+                            setTextForAll('Ngay_Duyet_Year', document.querySelector('.Ngay_Ky_Year')?.innerText || '...');
                         }
                         if (data.CCCD_NgayCap) {
                             const dateCap = new Date(data.CCCD_NgayCap);
