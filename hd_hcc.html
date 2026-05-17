@@ -706,9 +706,10 @@
                         setTextForAll('Ho_Ten', data.HoTen || '................');
                         
                         setTextForAll('UQ_HoTen', toTitleCase(data.UQ_HoTen || '................'));
-                        if (data.UQ_NgaySinh) {
-                            const d = new Date(data.UQ_NgaySinh);
-                            setTextForAll('UQ_NgaySinh', !isNaN(d.getTime()) ? d.toLocaleDateString('vi-VN') : data.UQ_NgaySinh);
+                        let uqNgaySinhData = data.UQ_NgaySinh || data.UQ_Ngaysinh || data.UQ_Ngay_Sinh;
+                        if (uqNgaySinhData) {
+                            const d = new Date(uqNgaySinhData);
+                            setTextForAll('UQ_NgaySinh', !isNaN(d.getTime()) ? d.toLocaleDateString('vi-VN') : uqNgaySinhData);
                         } else {
                             setTextForAll('UQ_NgaySinh', '........');
                         }
