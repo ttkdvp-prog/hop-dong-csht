@@ -689,10 +689,15 @@
                             setTextForAll('Ngay_Duyet_Year', document.querySelector('.Ngay_Ky_Year')?.innerText || '...');
                         }
                         if (data.CCCD_NgayCap) {
-                            const dateCap = new Date(data.CCCD_NgayCap);
-                            if (!isNaN(dateCap.getTime())) {
-                                setTextForAll('Ben_A_Ngay_Cap', dateCap.toLocaleDateString('vi-VN'));
+                            let displayDate = String(data.CCCD_NgayCap).trim();
+                            if (displayDate.includes('T') && displayDate.match(/^\d{4}-\d{2}-\d{2}T/)) {
+                                const d = new Date(displayDate);
+                                if (!isNaN(d.getTime())) displayDate = d.toLocaleDateString('vi-VN');
+                            } else if (displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                                const parts = displayDate.split('-');
+                                displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
                             }
+                            setTextForAll('Ben_A_Ngay_Cap', displayDate);
                         }
 
                         
@@ -708,8 +713,16 @@
                         setTextForAll('UQ_HoTen', toTitleCase(data.UQ_HoTen || '................'));
                         let uqNgaySinhData = data.UQ_NgaySinh || data.UQ_Ngaysinh || data.UQ_Ngay_Sinh;
                         if (uqNgaySinhData) {
-                            const d = new Date(uqNgaySinhData);
-                            setTextForAll('UQ_NgaySinh', !isNaN(d.getTime()) ? d.toLocaleDateString('vi-VN') : uqNgaySinhData);
+                            let displayDate = String(uqNgaySinhData).trim();
+                            if (displayDate.includes('T') && displayDate.match(/^\d{4}-\d{2}-\d{2}T/)) {
+                                const d = new Date(displayDate);
+                                if (!isNaN(d.getTime())) displayDate = d.toLocaleDateString('vi-VN');
+                            } else if (displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                                const parts = displayDate.split('-');
+                                displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                            }
+                            // Nếu đã là chuỗi kiểu 10/05/1988 thì giữ nguyên để không bị lộn ngày tháng
+                            setTextForAll('UQ_NgaySinh', displayDate);
                         } else {
                             setTextForAll('UQ_NgaySinh', '........');
                         }
@@ -728,10 +741,15 @@
                         setTextForAll('UQ_DanhXung', uqDanhXung);
                         
                         if (data.UQ_CCCD_NgayCap) {
-                            const uqDateCap = new Date(data.UQ_CCCD_NgayCap);
-                            if (!isNaN(uqDateCap.getTime())) {
-                                setTextForAll('UQ_NgayCap', uqDateCap.toLocaleDateString('vi-VN'));
+                            let displayDate = String(data.UQ_CCCD_NgayCap).trim();
+                            if (displayDate.includes('T') && displayDate.match(/^\d{4}-\d{2}-\d{2}T/)) {
+                                const d = new Date(displayDate);
+                                if (!isNaN(d.getTime())) displayDate = d.toLocaleDateString('vi-VN');
+                            } else if (displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                                const parts = displayDate.split('-');
+                                displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
                             }
+                            setTextForAll('UQ_NgayCap', displayDate);
                         } else {
                             setTextForAll('UQ_NgayCap', '................');
                         }
