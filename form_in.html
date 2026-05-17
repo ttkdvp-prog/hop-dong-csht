@@ -121,7 +121,7 @@
         <p>- Diện tích đất, nhà và tài sản trên là thuộc quyền sở hữu hợp pháp và duy nhất của bên A.</p>
         <p>- Tài sản khác bên A cho bên B thuê: không có.</p>
         <p>- Vị trí khu đất được xác định tại <span class="data-field Dia_Chi_Tram">...</span></p>
-        <p>- Giấy chứng nhận QSDĐ số: (hoặc giấy tờ tương đương)............................. (Photo kèm theo hợp đồng)</p>
+        <p>- Giấy chứng nhận QSDĐ số: (hoặc giấy tờ tương đương) <span class="data-field Giay_CN_QSDD">...</span> (Photo kèm theo hợp đồng)</p>
 
         <p class="bold">Điều 2. Trách nhiệm và Quyền lợi của bên A</p>
         <p>- Bàn giao vị trí, mặt bằng cho bên B (như đã ghi tại Điều 1) của hợp đồng.</p>
@@ -522,6 +522,7 @@
                         setTextForAll('Ben_A_Ngan_Hang', data.NganHang);
                         setTextForAll('Vi_Tri_Thue', data.TenTram);
                         setTextForAll('Dia_Chi_Tram', data.DiaChiTram || '........................');
+                        setTextForAll('Giay_CN_QSDD', data.GiayCNQSDD || '.............................');
                         setTextForAll('Ma_Tram', data.MaTram || idHopDong);
                         
                         const elsKyThanhToan = document.querySelectorAll('.Ky_Thanh_Toan');
