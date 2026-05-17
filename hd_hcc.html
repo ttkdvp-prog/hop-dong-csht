@@ -313,7 +313,7 @@
         <p>- Ngân hàng: Ngân hàng TMCP Công thương Việt Nam - Chi nhánh Phú Thọ</p>
         <p>- Mã số thuế: 2600102568</p>
         
-        <p class="bold">BÊN B : <span class="data-field UQ_DanhXung bold">Ông/Bà</span> <span class="data-field UQ_HoTen bold">...</span></p>
+        <p class="bold">BÊN B : <span class="data-field UQ_DanhXung bold" style="text-transform: capitalize;">Ông/Bà</span> <span class="data-field UQ_HoTen bold">...</span></p>
         <p>- Năm sinh: <span class="data-field UQ_NamSinh">...</span></p>
         <p>- Địa chỉ: <span class="data-field UQ_DiaChi">...</span></p>
         <p>- Số CCCD: <span class="data-field UQ_CCCD">...</span> Cấp ngày: <span class="data-field UQ_NgayCap">...</span></p>
@@ -710,10 +710,14 @@
                         setTextForAll('UQ_DiaChi', data.UQ_DiaChi || '................');
                         
                         let uqDanhXung = 'ông/bà';
-                        if (data.UQ_GioiTinh) {
-                            if (String(data.UQ_GioiTinh).toLowerCase() === 'nam') uqDanhXung = 'ông';
-                            else if (String(data.UQ_GioiTinh).toLowerCase() === 'nữ' || String(data.UQ_GioiTinh).toLowerCase() === 'nu') uqDanhXung = 'bà';
+                        let uqGt = data.UQ_GioiTinh || data.UQ_Gioitinh || data.UQ_Gioi_Tinh;
+                        if (uqGt) {
+                            if (String(uqGt).toLowerCase().trim() === 'nam') uqDanhXung = 'ông';
+                            else if (String(uqGt).toLowerCase().trim() === 'nữ' || String(uqGt).toLowerCase().trim() === 'nu') uqDanhXung = 'bà';
                         }
+                        
+                        // Capitalize if it's the beginning of a sentence in HĐ Dịch vụ
+                        setTextForAll('UQ_DanhXung', uqDanhXung);
                         setTextForAll('UQ_DanhXung', uqDanhXung);
                         
                         if (data.UQ_CCCD_NgayCap) {
