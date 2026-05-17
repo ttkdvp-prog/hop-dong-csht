@@ -198,7 +198,7 @@
     
     <div class="print-page">
         <!-- ================= TRANG 2: XÁC NHẬN CỦA UBND XÃ ================= -->
-        <div class="center bold" style="font-size: 14pt; margin-top: 20px;">ỦY BAN NHÂN DÂN <span class="data-field Dia_Chi_Tram" style="text-transform: uppercase;">...</span></div>
+        <div class="center bold" style="font-size: 14pt; margin-top: 20px;">GIẤY XÁC NHẬN</div>
         <p style="margin-top: 20px;">Căn cứ chủ trương tại Nghị quyết số 57-NQ/TW của Bộ Chính trị, Ủy ban nhân dân <span class="data-field Dia_Chi_Tram">...</span> thống nhất cho Viễn thông Phú Thọ sử dụng một phần diện tích NVH <span class="data-field Ten_Co_Quan_HCC">...</span> để lắp đặt, duy trì trạm phát sóng di động phục vụ chuyển đổi số và phục vụ nhân dân trên địa bàn.</p>
         <p>Ủy ban nhân dân xã cử <span class="data-field Ben_A_Danh_Xung" style="text-transform: capitalize;">Ông/Bà</span> <span class="data-field Ben_A_Ho_Ten">...</span> – Trưởng <span class="data-field Ten_Co_Quan_HCC">...</span> là người đại diện thôn phối hợp ký hợp đồng, quản lý trong quá trình vận hành.</p>
         <p>Việc sử dụng địa điểm nêu trên được thực hiện theo chức năng quản lý tài sản công của UBND xã, phù hợp mục tiêu công ích, không làm thay đổi chế độ quản lý, sử dụng tài sản công theo quy định hiện hành.</p>
@@ -265,7 +265,7 @@
             Độc lập - Tự do - Hạnh phúc<br>
             --------------------
         </div>
-        <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày <span class="data-field Ngay_Duyet_Day">...</span> tháng <span class="data-field Ngay_Duyet_Month">...</span> năm <span class="data-field Ngay_Duyet_Year">...</span></div>
+        <div class="italic" style="margin-left: 50%; text-align: center;">Phú Thọ, ngày..............tháng.............năm............</div>
         <div class="center title">GIẤY ĐỀ NGHỊ THANH TOÁN</div>
         
         <p class="bold italic">Kính gửi: Viễn thông Phú Thọ</p>
@@ -307,7 +307,7 @@
                 <td style="width: 65%; text-align: center; border: none; vertical-align: top;">
                     <span class="bold" style="font-size: 13pt; white-space: nowrap;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</span><br>
                     <span class="bold" style="font-size: 13pt; text-decoration: underline;">Độc lập - Tự do - Hạnh phúc</span><br>
-                    <span class="italic" style="font-size: 13pt; display: block; margin-top: 5px;">Phú Thọ, ngày <span class="data-field Ngay_Duyet_Day">...</span> tháng <span class="data-field Ngay_Duyet_Month">...</span> năm <span class="data-field Ngay_Duyet_Year">...</span></span>
+                    <span class="italic" style="font-size: 13pt; display: block; margin-top: 5px;">Phú Thọ, ngày..............tháng.............năm............</span>
                 </td>
             </tr>
         </table>
@@ -600,6 +600,13 @@
                                 setTextForAll('Ben_A_Ngay_Cap', dateCap.toLocaleDateString('vi-VN'));
                             }
                         }
+
+                        // Xử lý viết hoa bằng JavaScript (khắc phục lỗi font của html2canvas không nhận text-transform: uppercase)
+                        document.querySelectorAll('[style*="text-transform: uppercase"]').forEach(el => {
+                            if (el.innerText) {
+                                el.innerText = el.innerText.toUpperCase();
+                            }
+                        });
 
                         document.getElementById('loading').style.display = 'none';
                         document.getElementById('action-buttons').style.display = 'block';
